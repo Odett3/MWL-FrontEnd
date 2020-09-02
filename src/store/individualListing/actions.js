@@ -20,7 +20,6 @@ export function fetchPost(id) {
     const res = await axios.get(`http://localhost:4000/feed/${id}`);
 
     const onePost = res.data.listing;
-    console.log("thunk -> res", onePost);
 
     dispatch(postFullyFetched(onePost));
   };

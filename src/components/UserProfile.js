@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import moment from "moment";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,6 +9,7 @@ import { selectProfile } from "../store/userProfile/selectors";
 export default function UserProfile() {
   const dispatch = useDispatch();
   const { id } = useParams();
+
   useEffect(() => {
     dispatch(fetchProfile(id));
   }, [dispatch, id]);

@@ -18,11 +18,8 @@ export function fetchProfile(id) {
     dispatch(startLoadingPost());
 
     const res = await axios.get(`http://localhost:4000/user/${id}`);
-    console.log("thunk -> res", res);
 
     const oneProfile = res.data.user;
-    console.log("thunk ->  oneProfile", oneProfile);
-    // console.log("thunk -> res", onePost);
 
     dispatch(profileFullyFetched(oneProfile));
   };
