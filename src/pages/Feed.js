@@ -5,13 +5,14 @@ import ListingCard from "../components/ListingCard";
 export default function Feed() {
   const [listings, setListings] = useState([]);
 
-  const url = "https://jsonplaceholder.typicode.com/posts";
+  const url = "http://localhost:4000/feed";
 
   async function getResults() {
     try {
       const results = await axios.get(url);
+      console.log(results.data.allListings);
 
-      setListings(results.data);
+      setListings(results.data.allListings);
     } catch (error) {
       console.log(error.message);
     }
@@ -22,16 +23,28 @@ export default function Feed() {
 
   return (
     <div>
-      <h2>Our Cool Listings</h2>
+      <h2>What's on offer?</h2>
 
       {listings.map((list) => {
         return (
-          <ListingCard
-            id={list.id}
-            key={list.id}
-            title={list.title}
-            body={list.body}
-          />
+          <>
+            <h1 key={list.id}>{list.title}</h1>
+
+            <h3>
+              Posted by: {list.user.name} {list.user.surname}
+            </h3>
+
+            <h6>Location: {list.user.address}</h6>
+            {list.listingImages.map((i) => {
+              return <img width="40%" src={i.imageUrl} alt="foodItem" />;
+            })}
+
+            <p>
+              {list.tags.map((t) => {
+                return <p key={t.listingTags.tagId}> {t.title}</p>;
+              })}
+            </p>
+          </>
         );
       })}
     </div>
