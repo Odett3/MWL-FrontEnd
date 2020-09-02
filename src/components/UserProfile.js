@@ -2,48 +2,41 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import moment from "moment";
 import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+
+import { fetchProfile } from "../store/userProfile/actions";
+import { selectProfile } from "../store/userProfile/selectors";
 
 export default function UserProfile() {
-  const [user, setUser] = useState([]);
-
-  const params = useParams();
-
-  const userId = params.id;
-
-  const url = `http://localhost:4000/user/${userId}`;
-
-  async function getResults() {
-    try {
-      const results = await axios.get(url);
-
-      setUser(results.data.user);
-    } catch (error) {
-      console.log(error.message);
-    }
-  }
+  const dispatch = useDispatch();
+  const { id } = useParams();
   useEffect(() => {
-    getResults();
-  }, []);
+    dispatch(fetchProfile(id));
+  }, [dispatch, id]);
 
-  return user.length === 0 ? (
-    <p>Content Loading </p>
+  const p = useSelector(selectProfile);
+
+  return p === null ? (
+    <p>"loading"</p>
   ) : (
     <div>
       <h1>Work in progress </h1>
 
-      <img src={user.image} width="40%" alt="user icon" />
+      <img src={p.profile.image} width="40%" alt="user icon" />
+
+      <h4>
+        {p.profile.name} {p.profile.surname}
+      </h4>
 
       <p>
-        {user.name} {user.surname}
+        {p.profile.name} has <strong>{p.profile.listings.length} </strong>active
+        listings
       </p>
 
-      <p>
-        {user.name} has <strong>{user.listings.length} </strong>active listings{" "}
-      </p>
-
+      <p>Posting from {p.profile.address}</p>
       <p>
         Posting on Made with Love since:{" "}
-        {moment(user.createdAt).format("DD-MM-YYYY")}
+        {moment(p.profile.createdAt).format("DD-MM-YYYY")}
       </p>
     </div>
   );
