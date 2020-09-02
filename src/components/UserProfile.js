@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import moment from "moment";
 import { useParams } from "react-router-dom";
 
 export default function UserProfile() {
@@ -16,7 +17,6 @@ export default function UserProfile() {
       const results = await axios.get(url);
 
       setUser(results.data.user);
-      console.log(results.data.user);
     } catch (error) {
       console.log(error.message);
     }
@@ -41,7 +41,10 @@ export default function UserProfile() {
         {user.name} has <strong>{user.listings.length} </strong>active listings{" "}
       </p>
 
-      <p>Posting on Made with Love since: {user.createdAt}</p>
+      <p>
+        Posting on Made with Love since:{" "}
+        {moment(user.createdAt).format("DD-MM-YYYY")}
+      </p>
     </div>
   );
 }

@@ -1,30 +1,23 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React, { useEffect } from "react";
 import ListingCard from "../components/ListingCard";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchPosts } from "../store/feed/actions";
+import { selectFeedLoading, selectFeedPosts } from "../store/feed/selectors";
 
 export default function Feed() {
-  const [listings, setListings] = useState([]);
+  const dispatch = useDispatch();
+  const loading = useSelector(selectFeedLoading);
+  const posts = useSelector(selectFeedPosts);
 
-  const url = "http://localhost:4000/feed";
-
-  async function getResults() {
-    try {
-      const results = await axios.get(url);
-
-      setListings(results.data.allListings);
-    } catch (error) {
-      console.log(error.message);
-    }
-  }
   useEffect(() => {
-    getResults();
-  }, []);
+    dispatch(fetchPosts);
+  }, [dispatch]);
 
   return (
     <div>
       <h2>What's on offer?</h2>
-
-      {listings.map((list) => {
+      {loading ? "Posts loading..." : null}
+      {posts.map((list) => {
         return (
           <ListingCard
             key={list.id}
