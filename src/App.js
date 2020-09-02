@@ -3,7 +3,8 @@ import { Switch, Route } from "react-router-dom";
 import Navigation from "./components/Navigation";
 import HomePage from "./pages/HomePage";
 import Feed from "./pages/Feed";
-import ListingPage from "./components/ListingPage";
+import IndividualListing from "./pages/IndividualListing";
+import UserProfile from "./components/UserProfile";
 
 function App() {
   return (
@@ -13,7 +14,8 @@ function App() {
       <Switch>
         <Route exact path="/" component={HomePage} />
         <Route exact path="/feed" component={Feed} />
-        <Route path="/feed/:id" component={ListingPage} />
+        <Route path="/feed/:id" component={IndividualListing} />
+        <Route path="/user/:id" component={UserProfile} />
       </Switch>
     </div>
   );

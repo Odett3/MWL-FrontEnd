@@ -10,7 +10,6 @@ export default function Feed() {
   async function getResults() {
     try {
       const results = await axios.get(url);
-      console.log(results.data.allListings);
 
       setListings(results.data.allListings);
     } catch (error) {
@@ -27,24 +26,21 @@ export default function Feed() {
 
       {listings.map((list) => {
         return (
-          <>
-            <h1 key={list.id}>{list.title}</h1>
-
-            <h3>
-              Posted by: {list.user.name} {list.user.surname}
-            </h3>
-
-            <h6>Location: {list.user.address}</h6>
-            {list.listingImages.map((i) => {
-              return <img width="40%" src={i.imageUrl} alt="foodItem" />;
+          <ListingCard
+            key={list.id}
+            title={list.title}
+            name={list.user.name}
+            surname={list.user.surname}
+            icon={list.user.image}
+            location={list.user.address}
+            img={list.listingImages.map((i) => {
+              return i.imageUrl;
             })}
-
-            <p>
-              {list.tags.map((t) => {
-                return <p key={t.listingTags.tagId}> {t.title}</p>;
-              })}
-            </p>
-          </>
+            tags={list.tags.map((t) => {
+              return t.title;
+            })}
+            listingId={list.id}
+          />
         );
       })}
     </div>
