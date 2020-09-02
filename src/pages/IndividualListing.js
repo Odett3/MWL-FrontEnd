@@ -1,37 +1,26 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams, Link } from "react-router-dom";
+import { fetchPost } from "../store/individualListing/actions";
+import { selectPost } from "../store/individualListing/selectors";
 
-export default function IndividualListing(props) {
-  const [listing, setListing] = useState([]);
-
-  const params = useParams();
-
-  const listingId = params.id;
-
-  const url = `http://localhost:4000/feed/${listingId}`;
-
-  async function getResults() {
-    try {
-      const results = await axios.get(url);
-
-      setListing(results.data.listing);
-    } catch (error) {
-      console.log(error.message);
-    }
-  }
+export default function IndividualListing() {
+  const dispatch = useDispatch();
+  const { id } = useParams();
   useEffect(() => {
-    getResults();
-  }, []);
+    dispatch(fetchPost(id));
+  }, [dispatch, id]);
 
-  return listing.length === 0 ? (
-    <p> data is loading</p>
+  const listing = useSelector(selectPost);
+
+  return listing === null ? (
+    "loading"
   ) : (
     <div>
-      <h1>{listing.title}</h1>
+      <h1>{listing.post.title}</h1>
 
       <p> rest of description..... </p>
-      <Link to={`/user/${listing.user.id}`}>
+      <Link to={`/user/${listing.post.user.id}`}>
         <button> See more info on the user </button>
       </Link>
     </div>
