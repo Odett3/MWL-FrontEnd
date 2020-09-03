@@ -14,7 +14,7 @@ export default function IndividualListing() {
   const listing = useSelector(selectPost);
 
   return listing === null ? (
-    "loading"
+    <p>"loading"</p>
   ) : (
     <div>
       <h1>{listing.post.title}</h1>

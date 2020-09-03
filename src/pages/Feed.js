@@ -14,7 +14,7 @@ export default function Feed() {
   }, [dispatch]);
 
   return (
-    <div>
+    <div className="container home">
       <h2>What's on offer?</h2>
       {loading ? "Posts loading..." : null}
       {posts.map((list) => {
