@@ -26,6 +26,16 @@ export default function Navigation() {
       </NavLink>{" "}
       <NavLink
         exact
+        to="/login"
+        activeStyle={{
+          fontWeight: "bold",
+          color: "black",
+        }}
+      >
+        Login
+      </NavLink>{" "}
+      <NavLink
+        exact
         to="/signup"
         activeStyle={{
           fontWeight: "bold",

@@ -83,141 +83,152 @@ export default function SignUp() {
   };
 
   return (
-    <div>
+    <div className="jumbotron">
       <h1>Set up a new account!</h1>
-      <form onSubmit={handleSubmit}>
-        <p>
-          <label>Name</label>
-          <input
-            type="text"
-            name="name"
-            placeholder="name"
-            value={name}
-            onChange={(event) => {
-              setName(event.target.value);
-            }}
-          />
-        </p>
-        <p>
-          <label>Surname</label>
-          <input
-            type="text"
-            name="surname"
-            placeholder="surname"
-            value={surname}
-            onChange={(event) => {
-              setSurname(event.target.value);
-            }}
-          />
-        </p>
-        <p>
-          <label>Email</label>
-          <input
-            type="email"
-            name="email"
-            placeholder="email"
-            value={email}
-            onChange={(event) => {
-              setEmail(event.target.value);
-            }}
-          />
-        </p>
-        <p>
-          <label>Password</label>
-          <input
-            type="password"
-            name="password"
-            placeholder="password"
-            value={password}
-            onChange={(event) => {
-              setPassword(event.target.value);
-            }}
-          />
-        </p>
-        <p>
-          <label>Phone Number</label>
-          <input
-            type="number"
-            name="number"
-            placeholder="phone number"
-            value={phoneNumber}
-            onChange={(event) => {
-              setPhoneNumber(event.target.value);
-            }}
-          />
-        </p>
 
-        {/* address field: */}
+      <div className="form-group">
+        <form onSubmit={handleSubmit}>
+          <p>
+            <label>Name</label>
+            <input
+              className="form-control"
+              type="text"
+              name="name"
+              placeholder="name"
+              value={name}
+              onChange={(event) => {
+                setName(event.target.value);
+              }}
+            />
+          </p>
+          <p>
+            <label>Surname</label>
+            <input
+              className="form-control"
+              type="text"
+              name="surname"
+              placeholder="surname"
+              value={surname}
+              onChange={(event) => {
+                setSurname(event.target.value);
+              }}
+            />
+          </p>
+          <p>
+            <label>Email</label>
+            <input
+              className="form-control"
+              type="email"
+              name="email"
+              placeholder="email"
+              value={email}
+              onChange={(event) => {
+                setEmail(event.target.value);
+              }}
+            />
+          </p>
+          <p>
+            <label>Password</label>
+            <input
+              className="form-control"
+              type="password"
+              name="password"
+              placeholder="password"
+              value={password}
+              onChange={(event) => {
+                setPassword(event.target.value);
+              }}
+            />
+          </p>
+          <p>
+            <label>Phone Number</label>
+            <input
+              className="form-control"
+              type="number"
+              name="number"
+              placeholder="phone number"
+              value={phoneNumber}
+              onChange={(event) => {
+                setPhoneNumber(event.target.value);
+              }}
+            />
+          </p>
 
-        <div>
-          <PlacesAutocomplete
-            value={address}
-            onChange={setAddress}
-            onSelect={handleSelect}
-          >
-            {({
-              getInputProps,
-              suggestions,
-              getSuggestionItemProps,
-              loading,
-            }) => (
-              <div>
-                <p>
-                  {" "}
-                  Address:
-                  <input
-                    {...getInputProps({ placeholder: "Type your address" })}
-                  />
-                </p>
+          {/* address field: */}
+
+          <div>
+            <PlacesAutocomplete
+              value={address}
+              onChange={setAddress}
+              onSelect={handleSelect}
+            >
+              {({
+                getInputProps,
+                suggestions,
+                getSuggestionItemProps,
+                loading,
+              }) => (
                 <div>
-                  {loading ? <div> Loading addresses... </div> : null}
+                  <p>
+                    {" "}
+                    Address:
+                    <input
+                      className="form-control"
+                      {...getInputProps({ placeholder: "Type your address" })}
+                    />
+                  </p>
+                  <div>
+                    {loading ? <div> Loading addresses... </div> : null}
 
-                  {suggestions.map((suggestion) => {
-                    const style = {
-                      backgroundColor: suggestion.active ? "#41b6e6" : "#fff",
-                    };
-                    console.log("THIS IS SUGG", suggestion);
-                    return (
-                      <div
-                        key={suggestion.placeId}
-                        {...getSuggestionItemProps(suggestion, { style })}
-                      >
-                        {suggestion.description}
-                      </div>
-                    );
-                  })}
+                    {suggestions.map((suggestion) => {
+                      const style = {
+                        backgroundColor: suggestion.active ? "#41b6e6" : "#fff",
+                      };
+
+                      return (
+                        <div
+                          key={suggestion.placeId}
+                          {...getSuggestionItemProps(suggestion, { style })}
+                        >
+                          {suggestion.description}
+                        </div>
+                      );
+                    })}
+                  </div>
                 </div>
-              </div>
-            )}
-          </PlacesAutocomplete>
-          <p>{address}</p>
-        </div>
+              )}
+            </PlacesAutocomplete>
+            <p>{address}</p>
+          </div>
 
-        <p>
-          <label>Post Code</label>
-          <input
-            type="text"
-            name="text"
-            placeholder="Post Code"
-            value={postCode}
-            onChange={(event) => {
-              setPostCode(event.target.value);
-            }}
-          />
-        </p>
+          <p>
+            <label>Post Code</label>
+            <input
+              className="form-control"
+              type="text"
+              name="text"
+              placeholder="Post Code"
+              value={postCode}
+              onChange={(event) => {
+                setPostCode(event.target.value);
+              }}
+            />
+          </p>
 
-        {/* image field: */}
-        <p>
-          <input
-            type="file"
-            name="file"
-            placeholder="Upload an image"
-            onChange={handleUpload}
-          />{" "}
-          {loadingImage ? "Uploading your image..." : <img src={image} />}
-        </p>
-        <input type="submit" />
-      </form>
+          {/* image field: */}
+          <p>
+            <input
+              className="form-control"
+              type="file"
+              name="file"
+              placeholder="Upload an image"
+              onChange={handleUpload}
+            />{" "}
+            {loadingImage ? "Uploading your image..." : <img src={image} />}
+          </p>
+          <input className="btn btn-primary btn-lg" type="submit" />
+        </form>
+      </div>
     </div>
   );
 }
