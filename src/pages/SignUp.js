@@ -17,6 +17,7 @@ export default function SignUp() {
     lat: null,
     lng: null,
   });
+  const [postCode, setPostCode] = useState("");
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -30,7 +31,8 @@ export default function SignUp() {
       image,
       address,
       coordinates.lat,
-      coordinates.lng
+      coordinates.lng,
+      postCode
     );
 
     setEmail("");
@@ -44,6 +46,7 @@ export default function SignUp() {
       lat: null,
       lng: null,
     });
+    setPostCode("");
   }
   // image upload functions:
 
@@ -71,7 +74,7 @@ export default function SignUp() {
     uploadImage(e);
   }
 
-  //address field functions:
+  //address field function:
   const handleSelect = async (value) => {
     const results = await geocodeByAddress(value);
     const latLng = await getLatLng(results[0]);
@@ -162,7 +165,9 @@ export default function SignUp() {
                 <p>
                   {" "}
                   Address:
-                  <input {...getInputProps({ placeholder: "Type address" })} />
+                  <input
+                    {...getInputProps({ placeholder: "Type your address" })}
+                  />
                 </p>
                 <div>
                   {loading ? <div> Loading addresses... </div> : null}
@@ -171,9 +176,12 @@ export default function SignUp() {
                     const style = {
                       backgroundColor: suggestion.active ? "#41b6e6" : "#fff",
                     };
-
+                    console.log("THIS IS SUGG", suggestion);
                     return (
-                      <div {...getSuggestionItemProps(suggestion, { style })}>
+                      <div
+                        key={suggestion.placeId}
+                        {...getSuggestionItemProps(suggestion, { style })}
+                      >
                         {suggestion.description}
                       </div>
                     );
@@ -184,6 +192,19 @@ export default function SignUp() {
           </PlacesAutocomplete>
           <p>{address}</p>
         </div>
+
+        <p>
+          <label>Post Code</label>
+          <input
+            type="text"
+            name="text"
+            placeholder="Post Code"
+            value={postCode}
+            onChange={(event) => {
+              setPostCode(event.target.value);
+            }}
+          />
+        </p>
 
         {/* image field: */}
         <p>
