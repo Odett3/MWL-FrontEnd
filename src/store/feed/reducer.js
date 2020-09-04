@@ -14,7 +14,7 @@ export default function feedSliceReducer(state = initialState, action) {
     case "FEED-POSTS-FETCHED": {
       return {
         loading: false,
-        posts: [...state.posts, ...action.payload],
+        posts: [...action.payload],
       };
     }
     default: {

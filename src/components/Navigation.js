@@ -23,6 +23,16 @@ export default function Navigation() {
         }}
       >
         Listings
+      </NavLink>{" "}
+      <NavLink
+        exact
+        to="/signup"
+        activeStyle={{
+          fontWeight: "bold",
+          color: "black",
+        }}
+      >
+        Sign Up
       </NavLink>
     </>
   );
