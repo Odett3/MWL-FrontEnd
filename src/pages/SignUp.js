@@ -1,4 +1,8 @@
 import React, { useState } from "react";
+import PlacesAutocomplete, {
+  geocodeByAddress,
+  getLatLng,
+} from "react-places-autocomplete";
 
 export default function SignUp() {
   const [email, setEmail] = useState("");
@@ -8,11 +12,26 @@ export default function SignUp() {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [image, setImage] = useState("");
   const [loadingImage, setLoadingImage] = useState("");
+  const [address, setAddress] = useState("");
+  const [coordinates, setCoordinates] = useState({
+    lat: null,
+    lng: null,
+  });
 
   function handleSubmit(e) {
     e.preventDefault();
 
-    console.log(name, surname, email, password, phoneNumber, image);
+    console.log(
+      name,
+      surname,
+      email,
+      password,
+      phoneNumber,
+      image,
+      address,
+      coordinates.lat,
+      coordinates.lng
+    );
 
     setEmail("");
     setSurname("");
@@ -20,7 +39,13 @@ export default function SignUp() {
     setName("");
     setPhoneNumber("");
     setImage("");
+    setAddress("");
+    setCoordinates({
+      lat: null,
+      lng: null,
+    });
   }
+  // image upload functions:
 
   const uploadImage = async (e) => {
     const files = e.target.files;
@@ -46,13 +71,13 @@ export default function SignUp() {
     uploadImage(e);
   }
 
-  // const previewFile = (file) => {
-  //   const reader = new FileReader();
-  //   reader.readAsDataURL(file);
-  //   reader.onloadend = () => {
-  //     setPreviewSource(reader.result);
-  //   };
-  // };
+  //address field functions:
+  const handleSelect = async (value) => {
+    const results = await geocodeByAddress(value);
+    const latLng = await getLatLng(results[0]);
+    setAddress(value);
+    setCoordinates(latLng);
+  };
 
   return (
     <div>
@@ -82,7 +107,6 @@ export default function SignUp() {
             }}
           />
         </p>
-
         <p>
           <label>Email</label>
           <input
@@ -120,6 +144,48 @@ export default function SignUp() {
           />
         </p>
 
+        {/* address field: */}
+
+        <div>
+          <PlacesAutocomplete
+            value={address}
+            onChange={setAddress}
+            onSelect={handleSelect}
+          >
+            {({
+              getInputProps,
+              suggestions,
+              getSuggestionItemProps,
+              loading,
+            }) => (
+              <div>
+                <p>
+                  {" "}
+                  Address:
+                  <input {...getInputProps({ placeholder: "Type address" })} />
+                </p>
+                <div>
+                  {loading ? <div> Loading addresses... </div> : null}
+
+                  {suggestions.map((suggestion) => {
+                    const style = {
+                      backgroundColor: suggestion.active ? "#41b6e6" : "#fff",
+                    };
+
+                    return (
+                      <div {...getSuggestionItemProps(suggestion, { style })}>
+                        {suggestion.description}
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
+          </PlacesAutocomplete>
+          <p>{address}</p>
+        </div>
+
+        {/* image field: */}
         <p>
           <input
             type="file"
@@ -129,7 +195,6 @@ export default function SignUp() {
           />{" "}
           {loadingImage ? "Uploading your image..." : <img src={image} />}
         </p>
-
         <input type="submit" />
       </form>
     </div>
