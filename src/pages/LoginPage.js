@@ -1,19 +1,36 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory, Link } from "react-router-dom";
+
+import { login } from "../store/user/actions";
+import { selectToken } from "../store/user/selectors";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  function handleSubmit(event) {
+  const dispatch = useDispatch();
+  const token = useSelector(selectToken);
+  const history = useHistory();
+  useEffect(() => {
+    if (token !== null) {
+      history.push("/mypage");
+    }
+  }, [token, history]);
+
+  function submitForm(event) {
     event.preventDefault();
 
-    console.log("TODO login with:", email, password);
+    dispatch(login(email, password));
+
+    setEmail("");
+    setPassword("");
   }
 
   return (
     <div>
       <h1>Login</h1>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={submitForm}>
         <p>
           <label>
             Email:{" "}
@@ -38,6 +55,9 @@ export default function LoginPage() {
           <button type="submit">Login</button>
         </p>
       </form>
+      <p>
+        First time user? Create an account <Link to="/signup"> here </Link>
+      </p>
     </div>
   );
 }
