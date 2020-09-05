@@ -2,6 +2,7 @@ const initialState = {
   token: localStorage.getItem("token"),
   name: null,
   email: null,
+  listings: [],
 };
 
 export default (state = initialState, action) => {
@@ -15,7 +16,7 @@ export default (state = initialState, action) => {
         ...state,
         name: action.payload.name,
         surname: action.payload.surname,
-        listings: action.payload.listings,
+        listings: action.payload.user.listings,
         image: action.payload.image,
       };
 

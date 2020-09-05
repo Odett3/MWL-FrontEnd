@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectFeedPosts } from "../store/feed/selectors";
 export default function MapComponent() {
-  const listings = useSelector(selectFeedPosts);
+  // const listings = useSelector(selectFeedPosts);
 
   return (
     <div>
@@ -16,8 +16,8 @@ export default function MapComponent() {
         />
         <Marker position={[52.37949, 4.63772]}>
           <Popup>
-            Odette 💜
-            <Link to="/user/2">hiiiiii</Link>
+            User with 5 listings
+            <Link to="/user/2">CHECK ME OUT</Link>
           </Popup>
         </Marker>
       </Map>

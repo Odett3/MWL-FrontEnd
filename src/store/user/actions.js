@@ -42,19 +42,19 @@ export const login = (email, password) => {
   };
 };
 
-// export const fetchUserInfo = () => {
-//   return async (dispatch, getState) => {
-//     const token = selectToken(getState());
-//     if (token === null) return;
-//     try {
-//       const response = await axios.get("http://localhost:4000/me", {
-//         headers: { Authorization: `Bearer ${token}` },
-//       });
+export const fetchUserInfo = () => {
+  return async (dispatch, getState) => {
+    const token = selectToken(getState());
+    if (token === null) return;
+    try {
+      const response = await axios.get("http://localhost:4000/me", {
+        headers: { Authorization: `Bearer ${token}` },
+      });
 
-//       dispatch(userInfo(response.data));
-//       console.log(response.data);
-//     } catch (error) {
-//       console.log(error);
-//     }
-//   };
-// };
+      dispatch(userInfo(response.data));
+      console.log(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
