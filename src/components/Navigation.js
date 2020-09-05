@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { NavLink, Link } from "react-router-dom";
 import { logOut } from "../store/user/actions";
 import { selectToken } from "../store/user/selectors";
+
 export default function Navigation() {
   const dispatch = useDispatch();
   const token = useSelector(selectToken);
@@ -19,7 +20,9 @@ export default function Navigation() {
       >
         My Page
       </NavLink>{" "}
-      <Link onClick={() => dispatch(logOut())}>Logout</Link>
+      <Link to="/">
+        <button onClick={() => dispatch(logOut())}>Logout</button>
+      </Link>
     </>
   ) : (
     <>

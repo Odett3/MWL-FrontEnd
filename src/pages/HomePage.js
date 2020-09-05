@@ -9,7 +9,9 @@ export default function HomePage() {
       <h3>Welcome to Made with Love </h3>
       <MapComponent />
 
-      <Link to="/feed"> Check out our super cool listings </Link>
+      <h2>
+        <Link to="/feed"> Check out all our listings </Link>
+      </h2>
     </div>
   );
 }
