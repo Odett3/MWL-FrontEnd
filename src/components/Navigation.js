@@ -1,7 +1,56 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { NavLink, Link } from "react-router-dom";
+import { logOut } from "../store/user/actions";
+import { selectToken, selectUser } from "../store/user/selectors";
 
 export default function Navigation() {
+  const dispatch = useDispatch();
+  const token = useSelector(selectToken);
+  const user = useSelector(selectUser);
+
+  const isLoggedIn = token ? (
+    <>
+      <NavLink
+        exact
+        to="/mypage"
+        activeStyle={{
+          fontWeight: "bold",
+          color: "black",
+        }}
+      >
+        My Page
+      </NavLink>{" "}
+      <em>Logged in as {user.name}</em>
+      <Link to="/">
+        <button onClick={() => dispatch(logOut())}>Logout</button>
+      </Link>
+    </>
+  ) : (
+    <>
+      <NavLink
+        exact
+        to="/login"
+        activeStyle={{
+          fontWeight: "bold",
+          color: "black",
+        }}
+      >
+        Login
+      </NavLink>{" "}
+      <NavLink
+        exact
+        to="/signup"
+        activeStyle={{
+          fontWeight: "bold",
+          color: "black",
+        }}
+      >
+        Sign Up
+      </NavLink>
+    </>
+  );
+
   return (
     <>
       <NavLink
@@ -23,7 +72,8 @@ export default function Navigation() {
         }}
       >
         Listings
-      </NavLink>
+      </NavLink>{" "}
+      {isLoggedIn}
     </>
   );
 }

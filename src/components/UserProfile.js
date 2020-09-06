@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import moment from "moment";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-
+import { selectToken } from "../store/user/selectors";
 import { fetchProfile } from "../store/userProfile/actions";
 import { selectProfile } from "../store/userProfile/selectors";
 
@@ -15,8 +15,14 @@ export default function UserProfile() {
   }, [dispatch, id]);
 
   const p = useSelector(selectProfile);
+  const token = useSelector(selectToken);
 
-  return p === null ? (
+  return !token ? (
+    <h3>
+      " You are required to have an account in order to view this page. Follow{" "}
+      <Link to="/signup">this link</Link> to register on Made with Love 💟 "
+    </h3>
+  ) : p === null ? (
     <p>"loading"</p>
   ) : (
     <div>

@@ -6,6 +6,9 @@ import Feed from "./pages/Feed";
 import "./style/global.scss";
 import IndividualListing from "./pages/IndividualListing";
 import UserProfile from "./components/UserProfile";
+import SignUp from "./pages/SignUp";
+import LoginPage from "./pages/LoginPage";
+import MyPage from "./pages/MyPage";
 
 function App() {
   return (
@@ -15,6 +18,9 @@ function App() {
       <Switch>
         <Route exact path="/" component={HomePage} />
         <Route exact path="/feed" component={Feed} />
+        <Route exact path="/login" component={LoginPage} />
+        <Route exact path="/signup" component={SignUp} />
+        <Route exact path="/mypage" component={MyPage} />
         <Route path="/feed/:id" component={IndividualListing} />
         <Route path="/user/:id" component={UserProfile} />
       </Switch>
