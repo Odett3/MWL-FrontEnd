@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { selectUser, selectUserListings } from "../store/user/selectors";
 import { fetchUserInfo } from "../store/user/actions";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 export default function MyPage() {
   const dispatch = useDispatch();
@@ -29,7 +30,9 @@ export default function MyPage() {
             return <p key={l.id}>{l.title}</p>;
           })}
 
-      <button>Make a new listing!</button>
+      <Link to="/create">
+        <button>Make a new listing!</button>
+      </Link>
     </div>
   );
 }

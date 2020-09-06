@@ -13,6 +13,13 @@ export function profileFullyFetched(data) {
   };
 }
 
+export function usersFetched(data) {
+  return {
+    type: "ALL-PROFILES-FETCHED",
+    payload: data,
+  };
+}
+
 export function fetchProfile(id) {
   return async function thunk(dispatch, getState) {
     dispatch(startLoadingPost());
@@ -22,5 +29,16 @@ export function fetchProfile(id) {
     const oneProfile = res.data.user;
 
     dispatch(profileFullyFetched(oneProfile));
+  };
+}
+
+export function fetchAllUsers() {
+  return async function thunk(dispatch, getState) {
+    const res = await axios.get("http://localhost:4000/users");
+    console.log("what is res in actions", res);
+
+    const users = res.data.allUsers;
+
+    dispatch(usersFetched(users));
   };
 }

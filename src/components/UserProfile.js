@@ -23,12 +23,12 @@ export default function UserProfile() {
       <Link to="/signup">this link</Link> to register on Made with Love 💟 "
     </h3>
   ) : p === null ? (
-    <p>"loading"</p>
+    <p> {"loading"}</p>
   ) : (
     <div>
       <h1>Work in progress </h1>
 
-      <img src={p.profile.image} width="40%" alt="user icon" />
+      <img src={p.profile.image} width="30%" alt="user icon" />
 
       <h4>
         {p.profile.name} {p.profile.surname}

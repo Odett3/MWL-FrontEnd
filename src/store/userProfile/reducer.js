@@ -1,6 +1,7 @@
 const initialState = {
   loading: true,
   profile: null,
+  users: [],
   // comments: []
 };
 
@@ -14,8 +15,16 @@ export default function postPageSliceReducer(state = initialState, action) {
     }
     case "INDIVIDUAL-PROFILE-FETCHED": {
       return {
+        ...state,
         loading: false,
         profile: action.payload,
+      };
+    }
+    case "ALL-PROFILES-FETCHED": {
+      return {
+        ...state,
+        loading: false,
+        users: action.payload,
       };
     }
     default: {
