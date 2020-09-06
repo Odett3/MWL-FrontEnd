@@ -2,11 +2,12 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, Link } from "react-router-dom";
 import { logOut } from "../store/user/actions";
-import { selectToken } from "../store/user/selectors";
+import { selectToken, selectUser } from "../store/user/selectors";
 
 export default function Navigation() {
   const dispatch = useDispatch();
   const token = useSelector(selectToken);
+  const user = useSelector(selectUser);
 
   const isLoggedIn = token ? (
     <>
@@ -20,6 +21,7 @@ export default function Navigation() {
       >
         My Page
       </NavLink>{" "}
+      <em>Logged in as {user.name}</em>
       <Link to="/">
         <button onClick={() => dispatch(logOut())}>Logout</button>
       </Link>

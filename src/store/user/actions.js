@@ -17,9 +17,15 @@ const userInfo = (data) => {
   };
 };
 
+function signupSuccess(token) {
+  return {
+    type: "SIGNUP_SUCCESS",
+    payload: token,
+  };
+}
+
 export const login = (email, password) => {
   return async (dispatch, getState) => {
-    // dispatch(appLoading());
     try {
       const response = await axios.post("http://localhost:4000/login", {
         email,
@@ -52,9 +58,44 @@ export const fetchUserInfo = () => {
       });
 
       dispatch(userInfo(response.data));
-      console.log(response.data);
     } catch (error) {
       console.log(error);
     }
   };
 };
+
+export default function userSignUp(
+  name,
+  surname,
+  email,
+  password,
+  phone,
+  image,
+  lat,
+  long,
+  address,
+  postcode
+) {
+  return async function (dispatch, getState) {
+    try {
+      const response = await axios.post("http://localhost:4000/signup", {
+        name,
+        surname,
+        email,
+        password,
+        phone,
+        image,
+        lat,
+        long,
+        address,
+        postcode,
+      });
+      const token = response.data.jwt;
+      const action = signupSuccess(token);
+
+      dispatch(action);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}

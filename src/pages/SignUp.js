@@ -3,6 +3,9 @@ import PlacesAutocomplete, {
   geocodeByAddress,
   getLatLng,
 } from "react-places-autocomplete";
+import { useDispatch } from "react-redux";
+import userSignUp from "../store/user/actions";
+import { useHistory } from "react-router-dom";
 
 export default function SignUp() {
   const [email, setEmail] = useState("");
@@ -18,23 +21,27 @@ export default function SignUp() {
     lng: null,
   });
   const [postCode, setPostCode] = useState("");
+  const dispatch = useDispatch();
+  const history = useHistory();
 
   function handleSubmit(e) {
     e.preventDefault();
 
-    console.log(
-      name,
-      surname,
-      email,
-      password,
-      phoneNumber,
-      image,
-      address,
-      coordinates.lat,
-      coordinates.lng,
-      postCode
+    dispatch(
+      userSignUp(
+        name,
+        surname,
+        email,
+        password,
+        phoneNumber,
+        image,
+        parseFloat(coordinates.lat),
+        parseFloat(coordinates.lng),
+        address,
+        postCode
+      )
     );
-
+    history.push("/login");
     setEmail("");
     setSurname("");
     setPassword("");

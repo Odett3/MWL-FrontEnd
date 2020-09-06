@@ -16,7 +16,7 @@ export default function MapComponent() {
         />
         <Marker position={[52.37949, 4.63772]}>
           <Popup>
-            User with 5 listings
+            work in progress
             <Link to="/user/2">CHECK ME OUT</Link>
           </Popup>
         </Marker>

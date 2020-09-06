@@ -12,8 +12,6 @@ export default function MyPage() {
     dispatch(fetchUserInfo());
   }, [dispatch]);
 
-  console.log("WHAT HAVE WE GOT HERE", listings);
-
   return user === undefined ? (
     "loading data"
   ) : (
@@ -28,7 +26,7 @@ export default function MyPage() {
       {listings === undefined
         ? " "
         : listings.map((l) => {
-            return <p>{l.title}</p>;
+            return <p key={l.id}>{l.title}</p>;
           })}
 
       <button>Make a new listing!</button>
