@@ -11,10 +11,6 @@ export default (state = initialState, action) => {
       localStorage.setItem("token", action.payload.token);
       return { ...state, ...action.payload };
 
-    case "SIGNUP_SUCCESS":
-      localStorage.setItem("token", action.payload.token);
-      return { ...state, ...action.payload };
-
     case "USER_PROFILE":
       return {
         ...state,

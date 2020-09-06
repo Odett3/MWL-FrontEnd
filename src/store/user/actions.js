@@ -17,13 +17,6 @@ const userInfo = (data) => {
   };
 };
 
-function signupSuccess(token) {
-  return {
-    type: "SIGNUP_SUCCESS",
-    payload: token,
-  };
-}
-
 export const login = (email, password) => {
   return async (dispatch, getState) => {
     try {
@@ -90,10 +83,6 @@ export default function userSignUp(
         address,
         postcode,
       });
-      const token = response.data.jwt;
-      const action = signupSuccess(token);
-
-      dispatch(action);
     } catch (error) {
       console.log(error);
     }
