@@ -28,7 +28,7 @@ export default function MapComponent() {
         {users.map((u) => {
           return (
             <>
-              <Marker position={[u.lat, u.long]}>
+              <Marker key={u.id} position={[u.lat, u.long]}>
                 <Popup>
                   {u.name}
                   <Link to={`/user/${u.id}`}>CHECK ME OUT</Link>
