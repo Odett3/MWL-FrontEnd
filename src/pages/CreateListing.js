@@ -3,13 +3,17 @@ import { selectTags } from "../store/tags/selectors";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchTags } from "../store/tags/actions";
 // import { Link, useHistory } from "react-router-dom";
-// import { createPost } from "../../store/posts/actions";
+import { addPost } from "../store/feed/actions";
 
 export default function CreateListing() {
   const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
+  const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
   const [postTags, setPostTags] = useState([]);
+  const [image, setImage] = useState("");
+  const [loadingImage, setLoadingImage] = useState("");
+  // const [addTag, setNewTag] = useState("");
+
   const dispatch = useDispatch();
   const tags = useSelector(selectTags);
   console.log("CreateListing -> tags", tags);
@@ -20,15 +24,13 @@ export default function CreateListing() {
 
   function handleSubmit(event) {
     event.preventDefault();
-    console.log(title, content, price);
-    postTags.map((t) => {
-      console.log(t);
-    });
+    dispatch(addPost(title, description, price, image, postTags));
 
     // dispatch(createPost(title, content));
     // redirect to the homepage using useHistory & history.push
     // history.push("/");
   }
+  //tags functions:
 
   useEffect(() => {
     dispatch(fetchTags);
@@ -44,6 +46,32 @@ export default function CreateListing() {
       const newTags = [...postTags, tagId];
       setPostTags(newTags);
     }
+  }
+
+  //upload image functions
+
+  const uploadImage = async (e) => {
+    const files = e.target.files;
+    const data = new FormData();
+    data.append("file", files[0]);
+    data.append("upload_preset", "MWLlistings");
+    setLoadingImage(true);
+    const res = await fetch(
+      "http://api.cloudinary.com/v1_1/dztzswpcp/image/upload",
+      {
+        method: "POST",
+        body: data,
+      }
+    );
+    const fileUpload = await res.json();
+
+    setImage(fileUpload.url);
+    setLoadingImage(false);
+  };
+
+  function handleUpload(e) {
+    e.preventDefault();
+    uploadImage(e);
   }
 
   return (
@@ -67,6 +95,21 @@ export default function CreateListing() {
             })
           : null}
         <p>
+          {/* <h6>
+            Not what you're looking for? Add your own <strong>tag</strong>:{" "}
+          </h6>
+          <p>
+            <label>Tag name: </label>
+            <input
+              name="tag"
+              type="text"
+              placeholder=" ex. 'mexican' "
+              value={addTag}
+              onChange={(event) => {
+                setNewTag(event.target.value);
+              }}
+            />
+          </p> */}
           <label>Title of your item: </label>
           <input
             name="title"
@@ -78,10 +121,10 @@ export default function CreateListing() {
         <p>
           <label>Description; Tell us how it's made!</label>
           <textarea
-            name="content"
+            name="description"
             type="text"
-            value={content}
-            onChange={(event) => setContent(event.target.value)}
+            value={description}
+            onChange={(event) => setDescription(event.target.value)}
           />
         </p>
         <p>
@@ -93,6 +136,18 @@ export default function CreateListing() {
             onChange={(event) => setPrice(event.target.value)}
           />
         </p>
+        <h3> And finally add a picture!</h3>
+        <p>
+          <input
+            className="form-control"
+            type="file"
+            name="file"
+            placeholder="Upload an image"
+            onChange={handleUpload}
+          />{" "}
+        </p>
+
+        {loadingImage ? "Uploading your image..." : <img src={image} />}
         <input type="submit" />
       </form>
     </div>
