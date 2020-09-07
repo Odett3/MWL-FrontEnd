@@ -1,5 +1,6 @@
 import axios from "axios";
 import { selectToken } from "../user/selectors";
+import { appLoading, appDoneLoading } from "../appState/actions";
 
 const API_URL = `http://localhost:4000/feed`;
 
@@ -16,28 +17,27 @@ export function postsFetched(morePosts) {
   };
 }
 
-export function postCreated(data) {
+export function postCreated() {
   return {
     type: "POST_CREATED",
-    payload: data,
   };
 }
 
 export async function fetchPosts(dispatch, getState) {
-  dispatch(startLoading());
+  dispatch(appLoading());
 
   const res = await axios.get(API_URL);
 
   const morePosts = res.data.allListings;
-
+  dispatch(appDoneLoading());
   dispatch(postsFetched(morePosts));
 }
 
 export function addPost(title, description, price, imageUrl, tags) {
   return async function (dispatch, getState) {
     const token = selectToken(getState());
-    console.log("addPost -> token", token);
 
+    dispatch(appLoading());
     if (token === null) return;
     try {
       const response = await axios.post(
@@ -51,7 +51,8 @@ export function addPost(title, description, price, imageUrl, tags) {
         },
         { headers: { Authorization: `Bearer ${token}` } }
       );
-      dispatch(postCreated(response));
+      dispatch(appDoneLoading());
+      dispatch(postCreated());
     } catch (error) {
       console.log(error);
     }

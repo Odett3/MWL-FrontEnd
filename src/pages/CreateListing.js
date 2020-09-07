@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react";
 import { selectTags } from "../store/tags/selectors";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchTags } from "../store/tags/actions";
-// import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { addPost } from "../store/feed/actions";
+import { setMessage } from "../store/appState/actions";
 
 export default function CreateListing() {
   const [title, setTitle] = useState("");
@@ -12,6 +13,8 @@ export default function CreateListing() {
   const [postTags, setPostTags] = useState([]);
   const [image, setImage] = useState("");
   const [loadingImage, setLoadingImage] = useState("");
+  const [message, setMessage] = useState("");
+  const history = useHistory();
   // const [addTag, setNewTag] = useState("");
 
   const dispatch = useDispatch();
@@ -25,6 +28,13 @@ export default function CreateListing() {
   function handleSubmit(event) {
     event.preventDefault();
     dispatch(addPost(title, description, price, image, postTags));
+    setTitle("");
+    setDescription("");
+    setPrice("");
+    setImage("");
+    setPostTags([]);
+
+    setMessage("Thank you! Post Created!");
 
     // dispatch(createPost(title, content));
     // redirect to the homepage using useHistory & history.push
@@ -150,6 +160,7 @@ export default function CreateListing() {
         {loadingImage ? "Uploading your image..." : <img src={image} />}
         <input type="submit" />
       </form>
+      {message}
     </div>
   );
 }

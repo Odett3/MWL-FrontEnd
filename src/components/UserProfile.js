@@ -22,9 +22,7 @@ export default function UserProfile() {
       " You are required to have an account in order to view this page. Follow{" "}
       <Link to="/signup">this link</Link> to register on Made with Love 💟 "
     </h3>
-  ) : p === null ? (
-    <p> {"loading"}</p>
-  ) : (
+  ) : p ? (
     <div>
       <h1>Work in progress </h1>
 
@@ -45,5 +43,7 @@ export default function UserProfile() {
         {moment(p.profile.createdAt).format("DD-MM-YYYY")}
       </p>
     </div>
+  ) : (
+    <p>"Loading User Information..."</p>
   );
 }
