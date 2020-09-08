@@ -5,3 +5,7 @@ export function selectProfile(reduxState) {
         profile: reduxState.profile.profile,
       };
 }
+
+export function selectUsers(reduxState) {
+  return reduxState.profile.users;
+}

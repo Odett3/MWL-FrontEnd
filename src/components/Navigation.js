@@ -1,13 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, Link } from "react-router-dom";
-import { logOut } from "../store/user/actions";
+import { logOut, fetchUserInfo } from "../store/user/actions";
 import { selectToken, selectUser } from "../store/user/selectors";
 
 export default function Navigation() {
   const dispatch = useDispatch();
   const token = useSelector(selectToken);
   const user = useSelector(selectUser);
+
+  useEffect(() => {
+    dispatch(fetchUserInfo());
+  }, [dispatch]);
 
   const isLoggedIn = token ? (
     <>

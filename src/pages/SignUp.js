@@ -6,6 +6,7 @@ import PlacesAutocomplete, {
 import { useDispatch } from "react-redux";
 import userSignUp from "../store/user/actions";
 import { useHistory } from "react-router-dom";
+import { Col, Form, Button } from "react-bootstrap";
 
 export default function SignUp() {
   const [email, setEmail] = useState("");
@@ -90,152 +91,137 @@ export default function SignUp() {
   };
 
   return (
-    <div className="jumbotron">
+    <>
       <h1>Set up a new account!</h1>
 
-      <div className="form-group">
-        <form onSubmit={handleSubmit}>
-          <p>
-            <label>Name</label>
-            <input
-              className="form-control"
-              type="text"
-              name="name"
-              placeholder="name"
+      <Form onSubmit={handleSubmit}>
+        <Form.Row>
+          <Col>
+            <Form.Control
+              placeholder="First name"
               value={name}
               onChange={(event) => {
                 setName(event.target.value);
               }}
             />
-          </p>
-          <p>
-            <label>Surname</label>
-            <input
-              className="form-control"
-              type="text"
-              name="surname"
-              placeholder="surname"
+          </Col>
+          <Col>
+            <Form.Control
+              placeholder="Surname"
               value={surname}
               onChange={(event) => {
                 setSurname(event.target.value);
               }}
             />
-          </p>
-          <p>
-            <label>Email</label>
-            <input
-              className="form-control"
-              type="email"
-              name="email"
-              placeholder="email"
+          </Col>
+        </Form.Row>
+        <Form.Row>
+          <Form.Group controlId="formGridAddress1">
+            <Form.Control
+              placeholder="Email"
               value={email}
               onChange={(event) => {
                 setEmail(event.target.value);
               }}
             />
-          </p>
-          <p>
-            <label>Password</label>
-            <input
-              className="form-control"
+            <Form.Text className="text-muted">
+              We'll never share your email with anyone else.
+            </Form.Text>
+          </Form.Group>
+
+          <Col>
+            <Form.Control
               type="password"
-              name="password"
-              placeholder="password"
+              placeholder="Password"
               value={password}
               onChange={(event) => {
                 setPassword(event.target.value);
               }}
             />
-          </p>
-          <p>
-            <label>Phone Number</label>
-            <input
-              className="form-control"
-              type="number"
-              name="number"
-              placeholder="phone number"
-              value={phoneNumber}
-              onChange={(event) => {
-                setPhoneNumber(event.target.value);
-              }}
-            />
-          </p>
+          </Col>
+        </Form.Row>
+        <Col>
+          <Form.Control
+            placeholder="Phone Number"
+            value={phoneNumber}
+            onChange={(event) => {
+              setPhoneNumber(event.target.value);
+            }}
+          />
+        </Col>
 
-          {/* address field: */}
-
-          <div>
-            <PlacesAutocomplete
-              value={address}
-              onChange={setAddress}
-              onSelect={handleSelect}
-            >
-              {({
-                getInputProps,
-                suggestions,
-                getSuggestionItemProps,
-                loading,
-              }) => (
-                <div>
-                  <p>
-                    {" "}
-                    Address:
-                    <input
-                      className="form-control"
-                      {...getInputProps({ placeholder: "Type your address" })}
-                    />
-                  </p>
-                  <div>
-                    {loading ? <div> Loading addresses... </div> : null}
-
-                    {suggestions.map((suggestion) => {
-                      const style = {
-                        backgroundColor: suggestion.active ? "#41b6e6" : "#fff",
-                      };
-
-                      return (
-                        <div
-                          key={suggestion.placeId}
-                          {...getSuggestionItemProps(suggestion, { style })}
-                        >
-                          {suggestion.description}
-                        </div>
-                      );
+        <Form.Group controlId="formGridAddress1">
+          <PlacesAutocomplete
+            value={address}
+            onChange={setAddress}
+            onSelect={handleSelect}
+          >
+            {({
+              getInputProps,
+              suggestions,
+              getSuggestionItemProps,
+              loading,
+            }) => (
+              <div>
+                <p>
+                  {" "}
+                  <Form.Label>Address</Form.Label>
+                  <Form.Control
+                    className="form-control"
+                    {...getInputProps({
+                      placeholder: "Stationsplein 11 L,  Haarlem",
                     })}
-                  </div>
+                  />
+                </p>
+                <div>
+                  {loading ? <div> Loading addresses... </div> : null}
+
+                  {suggestions.map((suggestion) => {
+                    const style = {
+                      backgroundColor: suggestion.active ? "#41b6e6" : "#fff",
+                    };
+
+                    return (
+                      <div
+                        key={suggestion.placeId}
+                        {...getSuggestionItemProps(suggestion, { style })}
+                      >
+                        {suggestion.description}
+                      </div>
+                    );
+                  })}
                 </div>
-              )}
-            </PlacesAutocomplete>
-            <p>{address}</p>
-          </div>
+              </div>
+            )}
+          </PlacesAutocomplete>
+          <p>{address}</p>
 
-          <p>
-            <label>Post Code</label>
-            <input
-              className="form-control"
-              type="text"
-              name="text"
-              placeholder="Post Code"
-              value={postCode}
-              onChange={(event) => {
-                setPostCode(event.target.value);
-              }}
-            />
-          </p>
+          <Form.Label>Post Code</Form.Label>
+          <Form.Control
+            placeholder="2011 LR"
+            value={postCode}
+            onChange={(event) => {
+              setPostCode(event.target.value);
+            }}
+          />
+        </Form.Group>
 
-          {/* image field: */}
-          <p>
-            <input
-              className="form-control"
-              type="file"
-              name="file"
-              placeholder="Upload an image"
-              onChange={handleUpload}
-            />{" "}
-            {loadingImage ? "Uploading your image..." : <img src={image} />}
-          </p>
-          <input className="btn btn-primary btn-lg" type="submit" />
-        </form>
-      </div>
-    </div>
+        {/* image field: */}
+
+        <Form.Group>
+          <Form.File
+            id="exampleFormControlFile1"
+            type="file"
+            name="file"
+            placeholder="Upload an image"
+            onChange={handleUpload}
+          />{" "}
+          {loadingImage ? "Uploading your image..." : <img src={image} />}
+        </Form.Group>
+        <Button variant="primary" type="submit">
+          Submit
+        </Button>
+      </Form>
+    </>
   );
 }

@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { selectUser, selectUserListings } from "../store/user/selectors";
 import { fetchUserInfo } from "../store/user/actions";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 export default function MyPage() {
   const dispatch = useDispatch();
@@ -20,6 +21,7 @@ export default function MyPage() {
         Welcome back {user.name} {user.surname}!
       </h2>
 
+      <h4>User Dashboard:</h4>
       <p>
         You have: {listings.length === 0 ? "no" : listings.length} listings!{" "}
       </p>
@@ -29,7 +31,9 @@ export default function MyPage() {
             return <p key={l.id}>{l.title}</p>;
           })}
 
-      <button>Make a new listing!</button>
+      <Link to="/create">
+        <button>Make a new listing!</button>
+      </Link>
     </div>
   );
 }

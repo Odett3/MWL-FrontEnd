@@ -15,6 +15,13 @@ export default function postPageSliceReducer(state = initialState, action) {
         //TODO comments: []
       };
     }
+    case "ADD_HEART": {
+      return {
+        ...state,
+        post: { ...state.post, likes: state.post.likes + 1 },
+      };
+    }
+
     case "INDIVIDUAL-POST-FETCHED": {
       return {
         loading: false,

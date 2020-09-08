@@ -17,6 +17,13 @@ export default function feedSliceReducer(state = initialState, action) {
         posts: [...action.payload],
       };
     }
+
+    case "POST_CREATED":
+      return {
+        ...state,
+        posts: [...action.payload],
+      };
+
     default: {
       return state;
     }
