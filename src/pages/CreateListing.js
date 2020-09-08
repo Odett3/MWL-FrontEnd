@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchTags } from "../store/tags/actions";
 import { useHistory } from "react-router-dom";
 import { addPost } from "../store/feed/actions";
-import { setMessage } from "../store/appState/actions";
+// import { setMessage } from "../store/appState/actions";
 
 export default function CreateListing() {
   const [title, setTitle] = useState("");
@@ -14,8 +14,8 @@ export default function CreateListing() {
   const [image, setImage] = useState("");
   const [loadingImage, setLoadingImage] = useState("");
   const [message, setMessage] = useState("");
-  const history = useHistory();
-  const [addTag, setNewTag] = useState("");
+  // const history = useHistory();
+  // const [addTag, setNewTag] = useState("");
 
   const dispatch = useDispatch();
   const tags = useSelector(selectTags);
@@ -41,17 +41,17 @@ export default function CreateListing() {
     dispatch(fetchTags);
   }, [dispatch]);
 
-  function editTags(tagId) {
-    if (postTags.includes(tagId)) {
-      const newTags = postTags.filter((id) => {
-        return !(id === tagId);
-      });
-      setPostTags(newTags);
-    } else {
-      const newTags = [...postTags, tagId];
-      setPostTags(newTags);
-    }
-  }
+  // function editTags(tagId) {
+  //   if (postTags.includes(tagId)) {
+  //     const newTags = postTags.filter((id) => {
+  //       return !(id === tagId);
+  //     });
+  //     setPostTags(newTags);
+  //   } else {
+  //     const newTags = [...postTags, tagId];
+  //     setPostTags(newTags);
+  //   }
+  // }
 
   //upload image functions
 

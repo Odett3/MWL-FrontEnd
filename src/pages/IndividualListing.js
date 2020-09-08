@@ -14,11 +14,13 @@ export default function IndividualListing() {
     dispatch(fetchPost(id));
   }, [dispatch, id]);
 
-  const [toggle, setToggle] = useState(false);
+  // const [toggle, setToggle] = useState(false);
   const likes = useSelector(selectLikes);
-  const giveHeart = () => {
-    setToggle(!toggle);
-  };
+
+  //TODO
+  // const giveHeart = () => {
+  //   setToggle(!toggle);
+  // };
 
   useEffect(() => {
     dispatch(addingHeart);
@@ -32,7 +34,7 @@ export default function IndividualListing() {
     <div>
       <h1 key={listing.post.id}>{listing.post.title}</h1>
       <p> rest of description..... </p>
-      <Button onClick={() => dispatch(addingHeart())}>💖</Button>{" "}
+      <Button onClick={() => dispatch(addingHeart())}> 💖</Button>{" "}
       {likes ? likes : listing.post.likes}
       <br />
       <Link to={`/user/${listing.post.user.id}`}>

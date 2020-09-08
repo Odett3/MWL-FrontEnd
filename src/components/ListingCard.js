@@ -13,13 +13,12 @@ export default function ListingCard(props) {
       />
       <Media.Body>
         <h1 className="mt-0">{props.title}</h1>
-        <h3>
-          Posted by: {props.name} {props.surname}
-        </h3>
+        <h3 key={props.id}>Posted by: {props.name}</h3>
         <h6>Location: {props.location} </h6>
         <img width="40%" src={props.img} alt="foodItem" />
         <p>{props.tags}</p>
-
+        <p> 💖{props.likes}</p>
+        <br />
         <Link to={`/feed/${props.listingId}`}>See More</Link>
       </Media.Body>
     </Media>

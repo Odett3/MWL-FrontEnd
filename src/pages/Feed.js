@@ -13,7 +13,7 @@ export default function Feed() {
   const posts = useSelector(selectFeedPosts);
   const tags = useSelector(selectTags);
   const [selectedTag, setSelectedTag] = useState("");
-
+  const [sortedPost, setSortedPost] = useState("");
   useEffect(() => {
     dispatch(fetchPosts);
   }, [dispatch]);
@@ -21,13 +21,23 @@ export default function Feed() {
     dispatch(fetchTags);
   }, [dispatch]);
 
-  const filteredListings = selectedTag
-    ? posts.filter((p) =>
-        p.tags.some((t) => {
-          return t.title === selectedTag.title;
-        })
-      )
-    : posts;
+  function compareLikes(postA, postB) {
+    return postB.likes - postA.likes;
+  }
+
+  let filteredListings;
+
+  if (selectedTag) {
+    filteredListings = posts.filter((p) =>
+      p.tags.some((t) => {
+        return t.title === selectedTag.title;
+      })
+    );
+  } else if (sortedPost === "mostLikes") {
+    filteredListings = [...posts].sort(compareLikes);
+  } else {
+    filteredListings = [...posts];
+  }
 
   return (
     <div className="container home">
@@ -55,21 +65,27 @@ export default function Feed() {
                 </Button>
               );
             })
-          : null}
+          : null}{" "}
+        <br />
+        Filter by Popularity:
+        <select onChange={(event) => setSortedPost(event.target.value)}>
+          <option value=" "></option>
+          <option value="mostLikes">Sort By Most Liked</option>
+        </select>
       </h4>
       {loading ? "Posts loading..." : null}
       {filteredListings.map((list) => {
         return (
           <ListingCard
-            key={list.id}
+            id={list.id}
             title={list.title}
             name={list.user.name}
-            surname={list.user.surname}
             icon={list.user.image}
             location={list.user.address}
             img={list.listingImages.map((i) => {
               return i.imageUrl;
             })}
+            likes={list.likes}
             tags={list.tags.map((t) => {
               return (
                 <>
