@@ -25,11 +25,8 @@ export default function UserProfile() {
   ) : p ? (
     <div>
       <h1>Work in progress </h1>
-      {p.profile.image === null ? (
-        "loading"
-      ) : (
-        <img src={p.profile.image} width="30%" alt="user icon" />
-      )}
+
+      <img src={p.profile.image} width="30%" alt="user icon" />
 
       <h4>
         {p.profile.name} {p.profile.surname}

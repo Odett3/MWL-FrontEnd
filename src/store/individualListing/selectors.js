@@ -6,3 +6,7 @@ export function selectPost(reduxState) {
         // comments: reduxState.postPage.comments
       };
 }
+
+export function selectLikes(reduxState) {
+  return reduxState.listing.likes;
+}

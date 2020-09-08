@@ -14,6 +14,7 @@ export default function Feed() {
   const tags = useSelector(selectTags);
   const [selectedTag, setSelectedTag] = useState("");
   const [sortedPost, setSortedPost] = useState("");
+
   useEffect(() => {
     dispatch(fetchPosts);
   }, [dispatch]);
@@ -23,6 +24,9 @@ export default function Feed() {
 
   function compareLikes(postA, postB) {
     return postB.likes - postA.likes;
+  }
+  function compareDatePosted(postA, postB) {
+    return postB.id - postA.id;
   }
 
   let filteredListings;
@@ -35,75 +39,85 @@ export default function Feed() {
     );
   } else if (sortedPost === "mostLikes") {
     filteredListings = [...posts].sort(compareLikes);
+  } else if (sortedPost === "datePosted") {
+    filteredListings = [...posts].sort(compareDatePosted);
   } else {
+    console.log("THIS IS POSTS", posts);
     filteredListings = [...posts];
   }
+  console.log("THIS IS FILTERED", filteredListings);
+  // if (posts.name === undefined) return <h1>hello</h1>;
 
   return (
-    <div className="container home">
-      <h2>What's on offer?</h2>
+    posts && (
+      <div className="container home">
+        <h2>What's on offer?</h2>
 
-      <h4>
-        Filter by Tag:
-        <Button
-          variant="secondary"
-          size="lg"
-          onClick={() => setSelectedTag(null)}
-        >
-          All Listings{" "}
-        </Button>
-        {tags
-          ? tags.map((tag) => {
-              return (
-                <Button
-                  onClick={() => setSelectedTag(tag)}
-                  key={tag.id}
-                  variant="secondary"
-                  size="lg"
-                >
-                  {tag.title}
-                </Button>
-              );
-            })
-          : null}{" "}
-        <br />
-        Filter by Popularity:
-        <select onChange={(event) => setSortedPost(event.target.value)}>
-          <option value=" "></option>
-          <option value="mostLikes">Sort By Most Liked</option>
-        </select>
-      </h4>
-      {loading ? "Posts loading..." : null}
-      {filteredListings.map((list) => {
-        return (
-          <ListingCard
-            id={list.id}
-            title={list.title}
-            name={list.user.name}
-            icon={list.user.image}
-            location={list.user.address}
-            img={list.listingImages.map((i) => {
-              return i.imageUrl;
-            })}
-            likes={list.likes}
-            tags={list.tags.map((t) => {
-              return (
-                <>
+        <h4>
+          Filter by Tag:
+          <Button
+            variant="secondary"
+            size="lg"
+            onClick={() => setSelectedTag(null)}
+          >
+            All Listings{" "}
+          </Button>
+          {tags
+            ? tags.map((tag) => {
+                return (
                   <Button
-                    className="btn-flat"
-                    size="sm"
+                    onClick={() => setSelectedTag(tag)}
+                    key={tag.id}
                     variant="secondary"
-                    disabled
+                    size="lg"
                   >
-                    {t.title} 🏷
+                    {tag.title}
                   </Button>
-                </>
-              );
-            })}
-            listingId={list.id}
-          />
-        );
-      })}
-    </div>
+                );
+              })
+            : null}{" "}
+          <br />
+          Filter by Date/Popularity:
+          <select onChange={(event) => setSortedPost(event.target.value)}>
+            <option value=" "></option>
+            <option value="mostLikes">Sort By Most Liked</option>
+            <option value="datePosted">Sort By Last Posted</option>
+          </select>
+        </h4>
+        {loading ? "Posts loading..." : null}
+        {filteredListings &&
+          filteredListings.map((list) => {
+            console.log("list", list);
+            return (
+              <ListingCard
+                id={list.id}
+                title={list.title}
+                name={list.user.name}
+                icon={list.user.image}
+                location={list.user.address}
+                img={list.listingImages.map((i) => {
+                  return i.imageUrl;
+                })}
+                likes={list.likes}
+                tags={list.tags.map((t) => {
+                  return (
+                    <>
+                      <Button
+                        className="btn-flat"
+                        size="sm"
+                        variant="secondary"
+                        disabled
+                      >
+                        {t.title} 🏷
+                      </Button>
+                    </>
+                  );
+                })}
+                listingId={list.id}
+              />
+            );
+          })}
+      </div>
+    )
   );
 }

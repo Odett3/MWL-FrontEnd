@@ -5,7 +5,3 @@ export function selectFeedLoading(reduxState) {
 export function selectFeedPosts(reduxState) {
   return reduxState.feed.posts;
 }
-
-export function selectLikes(reduxState) {
-  return reduxState.feed.posts.likes;
-}

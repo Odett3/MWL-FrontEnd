@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, Link } from "react-router-dom";
 import { fetchPost } from "../store/individualListing/actions";
-import { addingHeart } from "../store/feed/actions";
+import { addingHeart } from "../store/individualListing/actions";
 import { selectPost } from "../store/individualListing/selectors";
 import { Button } from "react-bootstrap";
-import { selectLikes } from "../store/feed/selectors";
+import { selectLikes } from "../store/individualListing/selectors";
 
 export default function IndividualListing() {
   const dispatch = useDispatch();
@@ -14,13 +14,7 @@ export default function IndividualListing() {
     dispatch(fetchPost(id));
   }, [dispatch, id]);
 
-  // const [toggle, setToggle] = useState(false);
   const likes = useSelector(selectLikes);
-
-  //TODO
-  // const giveHeart = () => {
-  //   setToggle(!toggle);
-  // };
 
   useEffect(() => {
     dispatch(addingHeart);
