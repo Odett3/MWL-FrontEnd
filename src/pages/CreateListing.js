@@ -14,8 +14,8 @@ export default function CreateListing() {
   const [image, setImage] = useState("");
   const [loadingImage, setLoadingImage] = useState("");
   const [message, setMessage] = useState("");
-  // const history = useHistory();
-  // const [addTag, setNewTag] = useState("");
+  const history = useHistory();
+  const [addTag, setNewTag] = useState("");
 
   const dispatch = useDispatch();
   const tags = useSelector(selectTags);
@@ -26,7 +26,8 @@ export default function CreateListing() {
 
   function handleSubmit(event) {
     event.preventDefault();
-    dispatch(addPost(title, description, price, image, postTags));
+    // dispatch(addPost(title, description, price, image, postTags));
+    console.log(postTags);
     setTitle("");
     setDescription("");
     setPrice("");
@@ -34,6 +35,8 @@ export default function CreateListing() {
     setPostTags([]);
 
     setMessage("Thank you! Post Created!");
+
+    history.push("/mypage");
   }
   //tags functions:
 
