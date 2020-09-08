@@ -26,7 +26,7 @@ export default function CreateListing() {
 
   function handleSubmit(event) {
     event.preventDefault();
-    // dispatch(addPost(title, description, price, image, postTags));
+    dispatch(addPost(title, description, price, image, postTags));
     console.log(postTags);
     setTitle("");
     setDescription("");
@@ -44,17 +44,17 @@ export default function CreateListing() {
     dispatch(fetchTags);
   }, [dispatch]);
 
-  // function editTags(tagId) {
-  //   if (postTags.includes(tagId)) {
-  //     const newTags = postTags.filter((id) => {
-  //       return !(id === tagId);
-  //     });
-  //     setPostTags(newTags);
-  //   } else {
-  //     const newTags = [...postTags, tagId];
-  //     setPostTags(newTags);
-  //   }
-  // }
+  function editTags(tagId) {
+    if (postTags.includes(tagId)) {
+      const newTags = postTags.filter((id) => {
+        return !(id === tagId);
+      });
+      setPostTags(newTags);
+    } else {
+      const newTags = [...postTags, tagId];
+      setPostTags(newTags);
+    }
+  }
 
   //upload image functions
 
@@ -91,7 +91,12 @@ export default function CreateListing() {
           ? tags.map((tag) => {
               return (
                 <div>
-                  <input type="checkbox" id={tag.id} value={postTags} />
+                  <input
+                    type="checkbox"
+                    id={tag.id}
+                    value={postTags}
+                    onChange={() => editTags(tag.id)}
+                  />
                   {tag.title}
                 </div>
               );
