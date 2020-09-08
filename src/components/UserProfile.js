@@ -26,7 +26,9 @@ export default function UserProfile() {
     <div>
       <h1>Work in progress </h1>
 
-      <img src={p.profile.image} width="30%" alt="user icon" />
+      {p.profile.image && (
+        <img src={p.profile.image} width="30%" alt="user icon" />
+      )}
 
       <h4>
         {p.profile.name} {p.profile.surname}

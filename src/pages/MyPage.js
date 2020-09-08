@@ -21,6 +21,7 @@ export default function MyPage() {
         Welcome back {user.name} {user.surname}!
       </h2>
 
+      <h4>User Dashboard:</h4>
       <p>
         You have: {listings.length === 0 ? "no" : listings.length} listings!{" "}
       </p>

@@ -22,12 +22,25 @@ export default function IndividualListing() {
 
   const listing = useSelector(selectPost);
 
+  console.log("this is listing", listing);
+
   return listing === null ? (
     <p>"loading"</p>
   ) : (
     <div>
       <h1 key={listing.post.id}>{listing.post.title}</h1>
-      <p> rest of description..... </p>
+      {listing.post.listingImages.map((i) => {
+        return <img src={i.imageUrl} />;
+      })}
+      <h5>
+        {" "}
+        📞 Call {listing.post.user.name} on {listing.post.user.phone} to make an
+        order{" "}
+      </h5>
+      <h5>
+        👩🏻‍🍳<em> Words from the creator: </em>
+      </h5>
+      <p>{listing.post.description} </p>
       <Button onClick={() => dispatch(addingHeart())}> 💖</Button>{" "}
       {likes ? likes : listing.post.likes}
       <br />
