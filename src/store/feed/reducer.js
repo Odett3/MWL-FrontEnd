@@ -17,6 +17,12 @@ export default function feedSliceReducer(state = initialState, action) {
         posts: [...action.payload],
       };
     }
+    case "ADD_HEART":
+      return {
+        ...state,
+        posts: { likes: action.payload },
+      };
+
     case "POST_CREATED":
       return {
         ...state,

@@ -1,8 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, Link } from "react-router-dom";
 import { fetchPost } from "../store/individualListing/actions";
+import { addingHeart } from "../store/feed/actions";
 import { selectPost } from "../store/individualListing/selectors";
+import { Button } from "react-bootstrap";
+import { selectLikes } from "../store/feed/selectors";
 
 export default function IndividualListing() {
   const dispatch = useDispatch();
@@ -11,15 +14,27 @@ export default function IndividualListing() {
     dispatch(fetchPost(id));
   }, [dispatch, id]);
 
+  const [toggle, setToggle] = useState(false);
+  const likes = useSelector(selectLikes);
+  const giveHeart = () => {
+    setToggle(!toggle);
+  };
+
+  useEffect(() => {
+    dispatch(addingHeart);
+  }, [dispatch]);
+
   const listing = useSelector(selectPost);
 
   return listing === null ? (
     <p>"loading"</p>
   ) : (
     <div>
-      <h1>{listing.post.title}</h1>
-
+      <h1 key={listing.post.id}>{listing.post.title}</h1>
       <p> rest of description..... </p>
+      <Button onClick={() => dispatch(addingHeart())}>💖</Button>{" "}
+      {likes ? likes : listing.post.likes}
+      <br />
       <Link to={`/user/${listing.post.user.id}`}>
         <button> See more info on the user </button>
       </Link>

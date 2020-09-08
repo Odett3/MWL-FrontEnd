@@ -94,19 +94,19 @@ export default function CreateListing() {
               );
             })
           : null}
-        <p>
+        {/*         
           <h6>
             Not what you're looking for? Add your own <strong>tag</strong>:{" "}
           </h6>
-          <p>
-            <label>Tag name: </label>
-            <input
-              type="text"
-              placeholder=" ex. 'mexican' "
-              value={addTag}
-              onChange={(event) => setNewTag(event.target.value)}
-            />
-          </p>
+
+          <label>Tag name: </label>
+          <input
+            type="text"
+            placeholder=" ex. 'mexican' "
+            value={addTag}
+            onChange={(event) => setNewTag(event.target.value)}
+          /> */}
+        <p>
           <label>Title of your item: </label>
           <input
             name="title"

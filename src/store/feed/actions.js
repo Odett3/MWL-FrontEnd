@@ -16,11 +16,13 @@ export function postsFetched(morePosts) {
     payload: morePosts,
   };
 }
-
 export function postCreated() {
   return {
     type: "POST_CREATED",
   };
+}
+export function updateLikes(data) {
+  return { type: "ADD_HEART", payload: data };
 }
 
 export async function fetchPosts(dispatch, getState) {
@@ -56,5 +58,19 @@ export function addPost(title, description, price, imageUrl, tags) {
     } catch (error) {
       console.log(error);
     }
+  };
+}
+
+export function addingHeart() {
+  return async (dispatch, getState) => {
+    const listing = getState().listing.post;
+    console.log("addingHeart -> listing ", listing);
+
+    const response = await axios.patch(
+      `http://localhost:4000/feed/${listing.id}`
+    );
+    console.log("addingHeart -> response", response.data.listingAddLike.likes);
+
+    dispatch(updateLikes(response.data.listingAddLike.likes));
   };
 }
