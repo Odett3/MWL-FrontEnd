@@ -15,11 +15,10 @@ export default function CreateListing() {
   const [loadingImage, setLoadingImage] = useState("");
   const [message, setMessage] = useState("");
   const history = useHistory();
-  // const [addTag, setNewTag] = useState("");
+  const [addTag, setNewTag] = useState("");
 
   const dispatch = useDispatch();
   const tags = useSelector(selectTags);
-  console.log("CreateListing -> tags", tags);
 
   useEffect(() => {
     dispatch(fetchTags);
@@ -35,10 +34,6 @@ export default function CreateListing() {
     setPostTags([]);
 
     setMessage("Thank you! Post Created!");
-
-    // dispatch(createPost(title, content));
-    // redirect to the homepage using useHistory & history.push
-    // history.push("/");
   }
   //tags functions:
 
@@ -93,33 +88,25 @@ export default function CreateListing() {
           ? tags.map((tag) => {
               return (
                 <div>
-                  <input
-                    type="checkbox"
-                    id={tag.id}
-                    value={postTags}
-                    onChange={() => editTags(tag.id)}
-                  />
+                  <input type="checkbox" id={tag.id} value={postTags} />
                   {tag.title}
                 </div>
               );
             })
           : null}
         <p>
-          {/* <h6>
+          <h6>
             Not what you're looking for? Add your own <strong>tag</strong>:{" "}
           </h6>
           <p>
             <label>Tag name: </label>
             <input
-              name="tag"
               type="text"
               placeholder=" ex. 'mexican' "
               value={addTag}
-              onChange={(event) => {
-                setNewTag(event.target.value);
-              }}
+              onChange={(event) => setNewTag(event.target.value)}
             />
-          </p> */}
+          </p>
           <label>Title of your item: </label>
           <input
             name="title"

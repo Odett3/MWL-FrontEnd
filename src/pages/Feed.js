@@ -5,6 +5,7 @@ import { fetchPosts } from "../store/feed/actions";
 import { fetchTags } from "../store/tags/actions";
 import { selectFeedLoading, selectFeedPosts } from "../store/feed/selectors";
 import { selectTags } from "../store/tags/selectors";
+import { Button } from "react-bootstrap";
 
 export default function Feed() {
   const dispatch = useDispatch();
@@ -15,6 +16,8 @@ export default function Feed() {
 
   useEffect(() => {
     dispatch(fetchPosts);
+  }, [dispatch]);
+  useEffect(() => {
     dispatch(fetchTags);
   }, [dispatch]);
 
@@ -32,11 +35,24 @@ export default function Feed() {
 
       <h4>
         Filter by Tag:
-        <button onClick={() => setSelectedTag(null)}>All Listings </button>
+        <Button
+          variant="secondary"
+          size="lg"
+          onClick={() => setSelectedTag(null)}
+        >
+          All Listings{" "}
+        </Button>
         {tags
           ? tags.map((tag) => {
               return (
-                <button onClick={() => setSelectedTag(tag)}>{tag.title}</button>
+                <Button
+                  onClick={() => setSelectedTag(tag)}
+                  key={tag.id}
+                  variant="secondary"
+                  size="lg"
+                >
+                  {tag.title}
+                </Button>
               );
             })
           : null}
@@ -55,7 +71,18 @@ export default function Feed() {
               return i.imageUrl;
             })}
             tags={list.tags.map((t) => {
-              return <>{t.title} 🏷</>;
+              return (
+                <>
+                  <Button
+                    className="btn-flat"
+                    size="sm"
+                    variant="secondary"
+                    disabled
+                  >
+                    {t.title} 🏷
+                  </Button>
+                </>
+              );
             })}
             listingId={list.id}
           />

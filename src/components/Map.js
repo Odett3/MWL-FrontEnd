@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { Map, Marker, Popup, TileLayer } from "react-leaflet";
+import { Icon } from "leaflet";
 import "../style/map.css";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
@@ -15,6 +16,12 @@ export default function MapComponent() {
     dispatch(fetchAllUsers());
   }, [dispatch]);
 
+  const mwl = new Icon({
+    iconUrl:
+      "https://res.cloudinary.com/dztzswpcp/image/upload/v1599502988/mwl_bleqzc.png",
+    iconSize: [35, 35],
+  });
+
   return users === undefined ? (
     <p>"loading content..."</p>
   ) : (
@@ -28,7 +35,7 @@ export default function MapComponent() {
         {users.map((u) => {
           return (
             <>
-              <Marker key={u.id} position={[u.lat, u.long]}>
+              <Marker icon={mwl} key={u.id} position={[u.lat, u.long]}>
                 <Popup>
                   {u.name}
                   <Link to={`/user/${u.id}`}>CHECK ME OUT</Link>

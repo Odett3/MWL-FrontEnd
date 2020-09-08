@@ -25,8 +25,9 @@ export default function UserProfile() {
   ) : p ? (
     <div>
       <h1>Work in progress </h1>
-
-      <img src={p.profile.image} width="30%" alt="user icon" />
+      {p.profile.image ? (
+        <img src={p.profile.image} width="30%" alt="user icon" />
+      ) : null}
 
       <h4>
         {p.profile.name} {p.profile.surname}
