@@ -3,7 +3,7 @@ import { Switch, Route } from "react-router-dom";
 import Navigation from "./components/Navigation";
 import HomePage from "./pages/HomePage";
 import Feed from "./pages/Feed";
-import "./style/global.scss";
+// import "./style/global.scss";
 import IndividualListing from "./pages/IndividualListing";
 import UserProfile from "./components/UserProfile";
 import SignUp from "./pages/SignUp";
@@ -13,7 +13,7 @@ import CreateListing from "./pages/CreateListing";
 
 function App() {
   return (
-    <div>
+    <>
       <Navigation />
 
       <Switch>
@@ -26,7 +26,7 @@ function App() {
         <Route path="/feed/:id" component={IndividualListing} />
         <Route path="/user/:id" component={UserProfile} />
       </Switch>
-    </div>
+    </>
   );
 }
 

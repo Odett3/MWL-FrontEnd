@@ -3,8 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { NavLink, Link } from "react-router-dom";
 import { logOut, fetchUserInfo } from "../store/user/actions";
 import { selectToken, selectUser } from "../store/user/selectors";
-import { Navbar } from "react-bootstrap";
-import "../style/nav.css";
+import ThemeToggler from "../style/components.js/themeToggler";
 
 export default function Navigation() {
   const dispatch = useDispatch();
@@ -59,47 +58,31 @@ export default function Navigation() {
 
   return (
     <>
-      <Navbar bg="dark" variant="#c7b198">
-        <Navbar.Brand>
-          <img
-            alt=""
-            src="https://res.cloudinary.com/dztzswpcp/image/upload/v1599502988/mwl_bleqzc.png"
-            width="30"
-            height="30"
-            className="d-inline-block align-top"
-          />{" "}
-          <span
-            style={{
-              fontStyle: "oblique",
-              fontSize: "25px",
-              position: "relative",
-            }}
-          >
-            Made with Love
-          </span>{" "}
-          <NavLink
-            exact
-            to="/"
-            activeStyle={{
-              fontWeight: "bold",
-              color: "pink",
-            }}
-          >
-            Home
-          </NavLink>{" "}
-          <NavLink
-            exact
-            to="/feed"
-            activeStyle={{
-              fontWeight: "bold",
-              color: "pink",
-            }}
-          >
-            Listings
-          </NavLink>{" "}
-          {isLoggedIn}
-        </Navbar.Brand>
-      </Navbar>
+      Made with Love
+      <NavLink
+        exact
+        to="/"
+        activeStyle={{
+          fontWeight: "bold",
+          color: "pink",
+        }}
+      >
+        Home
+      </NavLink>{" "}
+      <NavLink
+        exact
+        to="/feed"
+        activeStyle={{
+          fontWeight: "bold",
+          color: "pink",
+        }}
+      >
+        Listings
+      </NavLink>{" "}
+      {isLoggedIn}
+      <p>
+        <ThemeToggler />
+      </p>
     </>
   );
 }
