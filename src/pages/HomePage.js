@@ -29,15 +29,14 @@ export default function HomePage() {
         <hr />
         <p className="mb-0">
           Be sure to checkout the map below to see if there is any users posting
-          around you, and if not we would love to have you as part of our
-          growing community!
+          around you, and if not we would love to have extend our growing
+          community!
         </p>
       </Alert>
-      <MapComponent />
-
       <h2>
         <Link to="/feed"> Check out all our listings </Link>
       </h2>
+      <MapComponent />
     </div>
   );
 }

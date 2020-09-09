@@ -3,6 +3,7 @@ import { selectUser, selectUserListings } from "../store/user/selectors";
 import { fetchUserInfo } from "../store/user/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { Box, Alert, AlertIcon, AlertDescription } from "@chakra-ui/core";
 
 export default function MyPage() {
   const dispatch = useDispatch();
@@ -17,11 +18,18 @@ export default function MyPage() {
     "loading data"
   ) : (
     <div>
-      <h2>
-        Welcome back {user.name} {user.surname}!
-      </h2>
+      <Box textAlign="center">
+        <Alert
+          style={{
+            backgroundColor: "#fbe2e5",
+            color: "black",
+          }}
+        >
+          <AlertDescription>Welcome Back {user.name}! 💖</AlertDescription>
+        </Alert>
+      </Box>
 
-      <h4>User Dashboard:</h4>
+      <h4>Dashboard:</h4>
       <p>
         You have: {listings.length === 0 ? "no" : listings.length} listings!{" "}
       </p>

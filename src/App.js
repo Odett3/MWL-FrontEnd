@@ -9,11 +9,12 @@ import SignUp from "./pages/SignUp";
 import LoginPage from "./pages/LoginPage";
 import MyPage from "./pages/MyPage";
 import CreateListing from "./pages/CreateListing";
+import Header from "./components/Navigation";
 
 function App() {
   return (
     <>
-      <Navigation />
+      <Header />
 
       <Switch>
         <Route exact path="/" component={HomePage} />
