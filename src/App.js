@@ -3,7 +3,6 @@ import { Switch, Route } from "react-router-dom";
 import Navigation from "./components/Navigation";
 import HomePage from "./pages/HomePage";
 import Feed from "./pages/Feed";
-// import "./style/global.scss";
 import IndividualListing from "./pages/IndividualListing";
 import UserProfile from "./components/UserProfile";
 import SignUp from "./pages/SignUp";

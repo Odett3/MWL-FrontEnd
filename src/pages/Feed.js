@@ -5,7 +5,6 @@ import { fetchPosts } from "../store/feed/actions";
 import { fetchTags } from "../store/tags/actions";
 import { selectFeedLoading, selectFeedPosts } from "../store/feed/selectors";
 import { selectTags } from "../store/tags/selectors";
-import { Button } from "react-bootstrap";
 
 export default function Feed() {
   const dispatch = useDispatch();
@@ -53,30 +52,33 @@ export default function Feed() {
 
         <h4>
           Filter by Tag:
-          <Button
+          <button
             variant="secondary"
             size="lg"
             onClick={() => setSelectedTag(null)}
           >
             All Listings{" "}
-          </Button>
+          </button>
           {tags
             ? tags.map((tag) => {
                 return (
-                  <Button
+                  <button
                     onClick={() => setSelectedTag(tag)}
                     key={tag.id}
                     variant="secondary"
                     size="lg"
                   >
                     {tag.title}
-                  </Button>
+                  </button>
                 );
               })
             : null}{" "}
           <br />
           Filter by Date/Popularity:
-          <select onChange={(event) => setSortedPost(event.target.value)}>
+          <select
+            onChange={(event) => setSortedPost(event.target.value)}
+            style={{ color: "hotpink" }}
+          >
             <option value=" "></option>
             <option value="mostLikes">Sort By Most Liked</option>
             <option value="datePosted">Sort By Last Posted</option>
@@ -100,14 +102,14 @@ export default function Feed() {
                 tags={list.tags.map((t) => {
                   return (
                     <>
-                      <Button
+                      <button
                         className="btn-flat"
                         size="sm"
                         variant="secondary"
                         disabled
                       >
                         {t.title} 🏷
-                      </Button>
+                      </button>
                     </>
                   );
                 })}
