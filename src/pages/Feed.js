@@ -45,8 +45,6 @@ export default function Feed() {
     console.log("THIS IS POSTS", posts);
     filteredListings = [...posts];
   }
-  console.log("THIS IS FILTERED", filteredListings);
-  // if (posts.name === undefined) return <h1>hello</h1>;
 
   return (
     posts && (

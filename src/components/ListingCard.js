@@ -1,26 +1,37 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Media } from "react-bootstrap";
+import { Card } from "react-bootstrap";
 
 export default function ListingCard(props) {
   return (
-    <Media border="primary" style={{ width: "18rem" }}>
-      <img
-        className="img-rounded"
-        width="20%"
-        src={props.icon}
-        alt="userIcon"
-      />
-      <Media.Body>
-        <h1 className="mt-0">{props.title}</h1>
-        <h3 key={props.id}>Posted by: {props.name}</h3>
+    <>
+      <Card.Img variant="top" src={props.img} />
+      <Card.Title>{props.title}</Card.Title>
+
+      <Card.Body>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+        occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+        mollit anim id est laborum.
         <h6>Location: {props.location} </h6>
-        <img width="40%" src={props.img} alt="foodItem" />
         <p>{props.tags}</p>
         <p> 💖{props.likes}</p>
-        <br />
+        <p>
+          {" "}
+          <img
+            variant="top"
+            src={props.icon}
+            style={{ borderRadius: "50%", width: "60px" }}
+          />
+          Posted by: {props.name}{" "}
+        </p>
+      </Card.Body>
+      <large className="text-muted">
         <Link to={`/feed/${props.listingId}`}>See More</Link>
-      </Media.Body>
-    </Media>
+      </large>
+    </>
   );
 }

@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { selectUsers } from "../store/userProfile/selectors";
 import { fetchAllUsers } from "../store/userProfile/actions";
-
+import { Card, Button } from "react-bootstrap";
 export default function MapComponent() {
   const users = useSelector(selectUsers);
 
@@ -37,8 +37,21 @@ export default function MapComponent() {
             <>
               <Marker icon={mwl} key={u.id} position={[u.lat, u.long]}>
                 <Popup>
-                  {u.name}
-                  <Link to={`/user/${u.id}`}>CHECK ME OUT</Link>
+                  <Card>
+                    <Card.Header>
+                      <em> Made with Love</em> 💖 in {u.address}
+                    </Card.Header>
+                    <Card.Body>
+                      <Card.Title>{u.name}</Card.Title>
+                      <Card.Text>
+                        👩🏻‍🍳Support Local Talent👩🏻‍🍳 Click the button below to visit
+                        the user's profile and check out the listings.
+                      </Card.Text>
+                      <Button variant="dark">
+                        <Link to={`/user/${u.id}`}>Go to profile</Link>
+                      </Button>
+                    </Card.Body>
+                  </Card>
                 </Popup>
               </Marker>
             </>
