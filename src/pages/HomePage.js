@@ -1,18 +1,27 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Box, Heading, Text, Divider, Button } from "@chakra-ui/core";
-
+import "../style/index.css";
 import MapComponent from "../components/Map";
 
 export default function HomePage() {
   return (
     <div>
-      <Box textAlign="center">
+      <Box
+        textAlign="center"
+        p={8}
+        borderWidth={1}
+        borderRadius={8}
+        boxShadow="lg"
+      >
         <Box>
-          <Heading mb={4} color="#eb8f8f">
+          <Heading color="#eb8f8f">
             {" "}
-            Hey, nice to see you! Welcome to Made with Love 💖
+            <div className="appTitle">
+              Hey, nice to see you! Welcome to Made with Love 💖
+            </div>
           </Heading>
+
           <Text fontSize="xl">
             Made with Love is a classifieds website where you can share your
             home made goods with our users! And if you're not such a good cook

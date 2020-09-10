@@ -72,7 +72,9 @@ export default function LoginPage() {
         ) : ( */}
         <>
           <Box textAlign="center">
-            <Heading>Login</Heading>
+            <Heading>
+              <div className="appTitle">Login</div>
+            </Heading>
           </Box>
           <Box my={4} textAlign="left">
             <form onSubmit={submitForm}>

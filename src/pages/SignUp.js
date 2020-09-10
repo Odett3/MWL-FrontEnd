@@ -52,7 +52,7 @@ export default function SignUp() {
         postCode
       )
     );
-    history.push("/login");
+    history.push("/mypage");
     setEmail("");
     setSurname("");
     setPassword("");
@@ -111,7 +111,9 @@ export default function SignUp() {
           boxShadow="lg"
         >
           <Box textAlign="left">
-            <Heading>Sign Up </Heading>
+            <Heading>
+              <div className="appTitle">Create your account</div>{" "}
+            </Heading>
             <br />
             <form onSubmit={handleSubmit}>
               <FormControl isRequired>

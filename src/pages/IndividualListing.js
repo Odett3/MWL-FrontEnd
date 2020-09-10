@@ -33,7 +33,7 @@ export default function IndividualListing() {
 
   const listing = useSelector(selectPost);
 
-  return listing === null ? (
+  return listing.user === undefined ? (
     <Flex width="full" align="center" justifyContent="center">
       <Spinner
         thickness="4px"
@@ -54,13 +54,15 @@ export default function IndividualListing() {
           borderRadius={8}
           boxShadow="lg"
         >
-          <Heading key={listing.post.id}>{listing.post.title}</Heading>
-          {listing.post.listingImages.map((i) => {
+          <Heading key={listing.id}>
+            <div className="appTitle">{listing.title}</div>
+          </Heading>
+          {listing.listingImages.map((i) => {
             return <Image rounded="md" src={i.imageUrl} width="100%" />;
           })}
           <Tag variantColor="pink"> Made to order</Tag>
           <Tag variantColor="pink" ml={1} fontsize="l">
-            €{listing.post.price}/serving
+            €{listing.price}/serving
           </Tag>
           <Divider borderColor="#eb8f8f" />
           <Box>
@@ -71,15 +73,15 @@ export default function IndividualListing() {
               fontWeight="bold"
               color="pink.800"
             >
-              📞 Call {listing.post.user.name} on {listing.post.user.phone} to
-              make an order{" "}
+              📞 Call {listing.user.name} on {listing.user.phone} to make an
+              order{" "}
             </Text>
           </Box>
           <Text mt={2} fontSize="xl" fontWeight="semibold" lineHeight="short">
             👩🏻‍🍳
-            {listing.post.description}
+            {listing.description}
           </Text>
-          <Text> Collection from: {listing.post.user.address}</Text>
+          <Text> Collection from: {listing.user.address}</Text>
           <br />
           <Box color="orange.400" />
           <Text ml={1} fontsize="sm">
@@ -94,10 +96,10 @@ export default function IndividualListing() {
                 Spread some 💖
               </Button>
             </b>{" "}
-            ({likes ? likes : listing.post.likes})
+            ({likes ? likes : listing.likes})
           </Text>{" "}
           <Divider borderColor="#eb8f8f" />
-          <Link to={`/user/${listing.post.user.id}`}>
+          <Link to={`/user/${listing.user.id}`}>
             <Button color="#eb8f8f" borderWidth={1} borderColor="#eb8f8f">
               {" "}
               Check out the rest of the user profile!{" "}

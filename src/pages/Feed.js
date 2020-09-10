@@ -15,6 +15,7 @@ import {
   Select,
   Divider,
   Flex,
+  Spinner,
 } from "@chakra-ui/core";
 
 export default function Feed() {
@@ -52,7 +53,6 @@ export default function Feed() {
   } else if (sortedPost === "datePosted") {
     filteredListings = [...posts].sort(compareDatePosted);
   } else {
-    console.log("THIS IS POSTS", posts);
     filteredListings = [...posts];
   }
 
@@ -60,7 +60,9 @@ export default function Feed() {
     posts && (
       <Box>
         {" "}
-        <Heading>What's on offer?</Heading>
+        <Heading>
+          <div className="appTitle">What's on offer?</div>
+        </Heading>
         <Box>
           <Divider borderColor="#eb8f8f" />
           <Select
@@ -107,13 +109,11 @@ export default function Feed() {
         <Divider />
         <Divider />
         <Grid templateColumns="repeat(4, 4fr)" gap={3}>
-          {loading ? "Posts loading..." : null}
           {filteredListings &&
             filteredListings.map((list) => {
-              console.log("list", list);
               return (
                 <ListingCard
-                  id={list.id}
+                  key={list.id}
                   title={list.title}
                   name={list.user.name}
                   icon={list.user.image}
@@ -126,7 +126,7 @@ export default function Feed() {
                     return (
                       <>
                         <Tag>
-                          <TagLabel>#{t.title}</TagLabel>
+                          <TagLabel key={t.id}>#{t.title}</TagLabel>
                         </Tag>{" "}
                       </>
                     );
