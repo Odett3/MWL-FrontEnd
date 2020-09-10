@@ -91,11 +91,19 @@ export default function SignUp() {
   };
 
   return (
-    // <>
-    //   <h1>Set up a new account!</h1>
+    <>
+      <h1>hello</h1>
+      <h1>hello</h1>
+    </>
+  );
 
-    {
-      /* <Form onSubmit={handleSubmit}>
+  // return (
+
+  // <>
+  //   <h1>Set up a new account!</h1>
+
+  {
+    /* <Form onSubmit={handleSubmit}>
         <Form.Row>
           <Col>
             <Form.Control
@@ -208,22 +216,22 @@ export default function SignUp() {
         </Form.Group>
 
         {/* image field: */
-    }
+  }
 
-    //     <Form.Group>
-    //       <Form.File
-    //         id="exampleFormControlFile1"
-    //         type="file"
-    //         name="file"
-    //         placeholder="Upload an image"
-    //         onChange={handleUpload}
-    //       />{" "}
-    //       {loadingImage ? "Uploading your image..." : <img src={image} />}
-    //     </Form.Group>
-    //     <Button variant="primary" type="submit">
-    //       Submit
-    //     </Button>
-    //   </Form>
-    // </> */}
-  );
+  //     <Form.Group>
+  //       <Form.File
+  //         id="exampleFormControlFile1"
+  //         type="file"
+  //         name="file"
+  //         placeholder="Upload an image"
+  //         onChange={handleUpload}
+  //       />{" "}
+  //       {loadingImage ? "Uploading your image..." : <img src={image} />}
+  //     </Form.Group>
+  //     <Button variant="primary" type="submit">
+  //       Submit
+  //     </Button>
+  //   </Form>
+  // </> */}
+  // );
 }

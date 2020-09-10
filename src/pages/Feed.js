@@ -5,6 +5,17 @@ import { fetchPosts } from "../store/feed/actions";
 import { fetchTags } from "../store/tags/actions";
 import { selectFeedLoading, selectFeedPosts } from "../store/feed/selectors";
 import { selectTags } from "../store/tags/selectors";
+import {
+  Box,
+  Button,
+  Grid,
+  Tag,
+  TagLabel,
+  Heading,
+  Select,
+  Divider,
+  Flex,
+} from "@chakra-ui/core";
 
 export default function Feed() {
   const dispatch = useDispatch();
@@ -47,77 +58,85 @@ export default function Feed() {
 
   return (
     posts && (
-      <div className="container home">
-        <h2>What's on offer?</h2>
-
-        <h4>
-          Filter by Tag:
-          <button
-            variant="secondary"
-            size="lg"
-            onClick={() => setSelectedTag(null)}
-          >
-            All Listings{" "}
-          </button>
-          {tags
-            ? tags.map((tag) => {
-                return (
-                  <button
-                    onClick={() => setSelectedTag(tag)}
-                    key={tag.id}
-                    variant="secondary"
-                    size="lg"
-                  >
-                    {tag.title}
-                  </button>
-                );
-              })
-            : null}{" "}
-          <br />
-          Filter by Date/Popularity:
-          <select
+      <Box>
+        <Box>
+          <Heading>What's on offer?</Heading>
+          <Divider borderColor="#eb8f8f" />
+          <Select
             onChange={(event) => setSortedPost(event.target.value)}
-            style={{ color: "hotpink" }}
+            variant="outline"
+            placeholder="Sort By.."
           >
-            <option value=" "></option>
             <option value="mostLikes">Sort By Most Liked</option>
             <option value="datePosted">Sort By Last Posted</option>
-          </select>
-        </h4>
-        {loading ? "Posts loading..." : null}
-        {filteredListings &&
-          filteredListings.map((list) => {
-            console.log("list", list);
-            return (
-              <ListingCard
-                id={list.id}
-                title={list.title}
-                name={list.user.name}
-                icon={list.user.image}
-                location={list.user.address}
-                img={list.listingImages.map((i) => {
-                  return i.imageUrl;
-                })}
-                likes={list.likes}
-                tags={list.tags.map((t) => {
+          </Select>
+          <Divider borderColor="#eb8f8f" />
+        </Box>
+
+        <Flex w="100%" flexWrap="wrap" justify="space-between">
+          <Box>
+            <Button
+              variant="secondary"
+              size="lg"
+              color="#eb8f8f"
+              borderWidth={1}
+              borderColor="#eb8f8f"
+              onClick={() => setSelectedTag(null)}
+            >
+              All Listings{" "}
+            </Button>
+            {tags
+              ? tags.map((tag) => {
                   return (
-                    <>
-                      <button
-                        className="btn-flat"
-                        size="sm"
-                        variant="secondary"
-                        disabled
-                      >
-                        {t.title} 🏷
-                      </button>
-                    </>
+                    <Button
+                      onClick={() => setSelectedTag(tag)}
+                      key={tag.id}
+                      variant="secondary"
+                      size="lg"
+                      color="#eb8f8f"
+                      borderWidth={1}
+                      borderColor="#eb8f8f"
+                    >
+                      {tag.title}
+                    </Button>
                   );
-                })}
-                listingId={list.id}
-              />
-            );
-          })}
-      </div>
+                })
+              : null}{" "}
+          </Box>
+        </Flex>
+        <Divider />
+        <Divider />
+        <Grid templateColumns="repeat(4, 4fr)" gap={3}>
+          {loading ? "Posts loading..." : null}
+          {filteredListings &&
+            filteredListings.map((list) => {
+              console.log("list", list);
+              return (
+                <ListingCard
+                  id={list.id}
+                  title={list.title}
+                  name={list.user.name}
+                  icon={list.user.image}
+                  location={list.user.address}
+                  img={list.listingImages.map((i) => {
+                    return i.imageUrl;
+                  })}
+                  likes={list.likes}
+                  tags={list.tags.map((t) => {
+                    return (
+                      <>
+                        <Tag>
+                          <TagLabel>#{t.title}</TagLabel>
+                        </Tag>{" "}
+                      </>
+                    );
+                  })}
+                  listingId={list.id}
+                />
+              );
+            })}
+        </Grid>
+      </Box>
     )
   );
 }

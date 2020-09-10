@@ -17,7 +17,7 @@ export default (state = initialState, action) => {
         name: action.payload.name,
         surname: action.payload.surname,
         listings: action.payload.user.listings,
-        image: [...action.payload.image],
+        image: action.payload.image,
       };
 
     case "LOG_OUT":

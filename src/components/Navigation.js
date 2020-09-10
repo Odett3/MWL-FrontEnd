@@ -3,10 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { NavLink, Link } from "react-router-dom";
 import { logOut, fetchUserInfo } from "../store/user/actions";
 import { selectToken, selectUser } from "../store/user/selectors";
-
 import ThemeToggler from "../style/components.js/ThemeToggler";
-
 import { Box, Heading, Flex, Text, Button } from "@chakra-ui/core";
+
 export default function Header(props) {
   const dispatch = useDispatch();
   const token = useSelector(selectToken);
