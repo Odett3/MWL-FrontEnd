@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { selectUser, selectUserListings } from "../store/user/selectors";
 import { fetchUserInfo } from "../store/user/actions";
+import { fetchPosts } from "../store/feed/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import moment from "moment";
@@ -10,9 +11,11 @@ export default function MyPage() {
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
   const listings = useSelector(selectUserListings);
+  console.log(listings);
 
   useEffect(() => {
-    dispatch(fetchUserInfo());
+    dispatch(fetchUserInfo);
+    dispatch(fetchPosts);
   }, [dispatch]);
 
   const cardC = {

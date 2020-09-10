@@ -59,8 +59,9 @@ export default function Feed() {
   return (
     posts && (
       <Box>
+        {" "}
+        <Heading>What's on offer?</Heading>
         <Box>
-          <Heading>What's on offer?</Heading>
           <Divider borderColor="#eb8f8f" />
           <Select
             onChange={(event) => setSortedPost(event.target.value)}
@@ -72,7 +73,6 @@ export default function Feed() {
           </Select>
           <Divider borderColor="#eb8f8f" />
         </Box>
-
         <Flex w="100%" flexWrap="wrap" justify="space-between">
           <Box>
             <Button

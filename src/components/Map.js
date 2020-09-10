@@ -7,6 +7,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { selectUsers } from "../store/userProfile/selectors";
 import { fetchAllUsers } from "../store/userProfile/actions";
 import { Card, Button } from "react-bootstrap";
+import { Spinner, Flex } from "@chakra-ui/core";
+
 export default function MapComponent() {
   const users = useSelector(selectUsers);
 
@@ -23,7 +25,15 @@ export default function MapComponent() {
   });
 
   return users === undefined ? (
-    <p>"loading content..."</p>
+    <Flex width="full" align="center" justifyContent="center">
+      <Spinner
+        thickness="4px"
+        speed="0.65s"
+        emptyColor="pink.200"
+        color="pink"
+        size="xl"
+      />
+    </Flex>
   ) : (
     <div>
       <Map center={[52.37949, 4.63772]} zoom={12}>

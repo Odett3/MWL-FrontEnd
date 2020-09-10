@@ -41,7 +41,7 @@ export default function CreateListing() {
   function handleSubmit(event) {
     event.preventDefault();
     dispatch(addPost(title, description, price, image, postTags));
-    console.log(postTags);
+
     setTitle("");
     setDescription("");
     setPrice("");
