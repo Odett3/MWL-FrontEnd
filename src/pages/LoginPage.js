@@ -13,7 +13,6 @@ import {
   Input,
   Button,
   CircularProgress,
-  Text,
 } from "@chakra-ui/core";
 import ErrorMessage from "../style/components.js/ErrorMsg";
 
@@ -103,6 +102,9 @@ export default function LoginPage() {
                 width="full"
                 mt={4}
                 type="submit"
+                color="#eb8f8f"
+                borderWidth={1}
+                borderColor="#eb8f8f"
               >
                 {isLoading ? (
                   <CircularProgress

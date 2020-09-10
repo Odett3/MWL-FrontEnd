@@ -6,7 +6,17 @@ import PlacesAutocomplete, {
 import { useDispatch } from "react-redux";
 import userSignUp from "../store/user/actions";
 import { useHistory } from "react-router-dom";
-import { Col, Form, Button } from "react-bootstrap";
+import {
+  Box,
+  Heading,
+  Flex,
+  FormControl,
+  FormLabel,
+  Input,
+  Stack,
+  FormHelperText,
+  Button,
+} from "@chakra-ui/core";
 
 export default function SignUp() {
   const [email, setEmail] = useState("");
@@ -92,8 +102,154 @@ export default function SignUp() {
 
   return (
     <>
-      <h1>hello</h1>
-      <h1>hello</h1>
+      <Flex width="full" align="center" justifyContent="center">
+        <Box
+          p={8}
+          maxWidth="800px"
+          borderWidth={1}
+          borderRadius={8}
+          boxShadow="lg"
+        >
+          <Box textAlign="left">
+            <Heading>Sign Up </Heading>
+            <br />
+            <form>
+              <FormControl isRequired>
+                <Stack isInline align="center">
+                  <FormLabel>Name</FormLabel>
+                  <Input
+                    type="text"
+                    placeholder="Tommy"
+                    value={name}
+                    onChange={(event) => {
+                      setName(event.target.value);
+                    }}
+                  />
+                  <FormLabel>Surname</FormLabel>
+                  <Input
+                    type="text"
+                    placeholder="Brown"
+                    value={surname}
+                    onChange={(event) => {
+                      setSurname(event.target.value);
+                    }}
+                  />
+                </Stack>
+
+                <FormLabel>Email</FormLabel>
+                <Input
+                  type="email"
+                  placeholder="test@test.com"
+                  value={email}
+                  onChange={(event) => {
+                    setEmail(event.target.value);
+                  }}
+                />
+                <FormHelperText id="email-helper-text">
+                  We'll never share your email.
+                </FormHelperText>
+                <FormLabel>Password</FormLabel>
+                <Input
+                  type="password"
+                  placeholder="*****"
+                  value={password}
+                  onChange={(event) => {
+                    setPassword(event.target.value);
+                  }}
+                />
+
+                <PlacesAutocomplete
+                  value={address}
+                  onChange={setAddress}
+                  onSelect={handleSelect}
+                >
+                  {({
+                    getInputProps,
+                    suggestions,
+                    getSuggestionItemProps,
+                    loading,
+                  }) => (
+                    <div>
+                      <p>
+                        <FormLabel>Address</FormLabel>
+                        <Input
+                          {...getInputProps({ placeholder: "114 Leidseplein" })}
+                        />
+                        <FormHelperText id="email-helper-text">
+                          please select from suggestions.
+                        </FormHelperText>
+                      </p>
+                      <div>
+                        {loading ? <div> Loading addresses... </div> : null}
+
+                        {suggestions.map((suggestion) => {
+                          const style = {
+                            backgroundColor: suggestion.active
+                              ? "#eb8f8f"
+                              : "#fff",
+                          };
+
+                          return (
+                            <div
+                              key={suggestion.placeId}
+                              {...getSuggestionItemProps(suggestion, { style })}
+                            >
+                              {suggestion.description}
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  )}
+                </PlacesAutocomplete>
+                <p>{address}</p>
+              </FormControl>
+
+              <FormLabel>Post Code </FormLabel>
+              <Input
+                type="text"
+                placeholder="1234EB"
+                value={postCode}
+                onChange={(event) => {
+                  setPostCode(event.target.value);
+                }}
+              />
+              <FormLabel>Phone Number</FormLabel>
+              <Input
+                type="number"
+                placeholder="0647199302"
+                value={phoneNumber}
+                onChange={(event) => {
+                  setPhoneNumber(event.target.value);
+                }}
+              />
+              <FormLabel>Profile Picture</FormLabel>
+              <Input
+                type="file"
+                name="file"
+                placeholder="Upload an image"
+                onChange={handleUpload}
+              />
+              {loadingImage ? "Uploading your image..." : <img src={image} />}
+              <br />
+
+              <Button
+                variantColor="#hotpink"
+                variant="outline"
+                width="full"
+                mt={4}
+                type="submit"
+                color="#eb8f8f"
+                borderWidth={1}
+                borderColor="#eb8f8f"
+              >
+                {" "}
+                Create Account{" "}
+              </Button>
+            </form>
+          </Box>
+        </Box>
+      </Flex>
     </>
   );
 
