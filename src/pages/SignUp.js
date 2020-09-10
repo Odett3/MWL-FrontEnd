@@ -113,7 +113,7 @@ export default function SignUp() {
           <Box textAlign="left">
             <Heading>Sign Up </Heading>
             <br />
-            <form>
+            <form onSubmit={handleSubmit}>
               <FormControl isRequired>
                 <Stack isInline align="center">
                   <FormLabel>Name</FormLabel>
@@ -184,6 +184,7 @@ export default function SignUp() {
 
                         {suggestions.map((suggestion) => {
                           const style = {
+                            color: suggestion.active ? "white" : "#eb8f8f",
                             backgroundColor: suggestion.active
                               ? "#eb8f8f"
                               : "#fff",
