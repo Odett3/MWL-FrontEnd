@@ -4,7 +4,20 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchTags } from "../store/tags/actions";
 import { useHistory } from "react-router-dom";
 import { addPost } from "../store/feed/actions";
-// import { setMessage } from "../store/appState/actions";
+import { selectToken } from "../store/user/selectors";
+import {
+  Box,
+  Heading,
+  Flex,
+  FormControl,
+  FormLabel,
+  Input,
+  Textarea,
+  Checkbox,
+  CheckboxGroup,
+  Button,
+  Divider,
+} from "@chakra-ui/core";
 
 export default function CreateListing() {
   const [title, setTitle] = useState("");
@@ -26,8 +39,8 @@ export default function CreateListing() {
 
   function handleSubmit(event) {
     event.preventDefault();
-    // dispatch(addPost(title, description, price, image, postTags));
-    console.log(postTags);
+    dispatch(addPost(title, description, price, image, postTags));
+
     setTitle("");
     setDescription("");
     setPrice("");
@@ -44,17 +57,17 @@ export default function CreateListing() {
     dispatch(fetchTags);
   }, [dispatch]);
 
-  // function editTags(tagId) {
-  //   if (postTags.includes(tagId)) {
-  //     const newTags = postTags.filter((id) => {
-  //       return !(id === tagId);
-  //     });
-  //     setPostTags(newTags);
-  //   } else {
-  //     const newTags = [...postTags, tagId];
-  //     setPostTags(newTags);
-  //   }
-  // }
+  function editTags(tagId) {
+    if (postTags.includes(tagId)) {
+      const newTags = postTags.filter((id) => {
+        return !(id === tagId);
+      });
+      setPostTags(newTags);
+    } else {
+      const newTags = [...postTags, tagId];
+      setPostTags(newTags);
+    }
+  }
 
   //upload image functions
 
@@ -81,76 +94,110 @@ export default function CreateListing() {
     e.preventDefault();
     uploadImage(e);
   }
-
+  const token = useSelector(selectToken);
   return (
-    <div>
-      <h1>Create a listing </h1>
-      <form onSubmit={handleSubmit}>
-        <h3>Select a tag that describes your listing: </h3>
-        {tags
-          ? tags.map((tag) => {
-              return (
-                <div>
-                  <input type="checkbox" id={tag.id} value={postTags} />
-                  {tag.title}
-                </div>
-              );
-            })
-          : null}
-        {/*         
-          <h6>
-            Not what you're looking for? Add your own <strong>tag</strong>:{" "}
-          </h6>
+    token && (
+      <>
+        <Flex width="full" align="center" justifyContent="center">
+          <Box
+            p={8}
+            maxWidth="800px"
+            borderWidth={1}
+            borderRadius={8}
+            boxShadow="lg"
+          >
+            <Box textAlign="left">
+              <Heading>
+                <div className="appTitle"> Create a listing: </div>
+              </Heading>
+              <Divider borderColor="#eb8f8f" />
+              <form onSubmit={handleSubmit}>
+                <FormLabel>
+                  Select a tag/tags that describes your listing:
+                </FormLabel>
 
-          <label>Tag name: </label>
-          <input
-            type="text"
-            placeholder=" ex. 'mexican' "
-            value={addTag}
-            onChange={(event) => setNewTag(event.target.value)}
-          /> */}
-        <p>
-          <label>Title of your item: </label>
-          <input
-            name="title"
-            type="text"
-            value={title}
-            onChange={(event) => setTitle(event.target.value)}
-          />
-        </p>
-        <p>
-          <label>Description; Tell us how it's made!</label>
-          <textarea
-            name="description"
-            type="text"
-            value={description}
-            onChange={(event) => setDescription(event.target.value)}
-          />
-        </p>
-        <p>
-          <label>Price: </label>
-          <input
-            name="price"
-            type="number"
-            value={price}
-            onChange={(event) => setPrice(event.target.value)}
-          />
-        </p>
-        <h3> And finally add a picture!</h3>
-        <p>
-          <input
-            className="form-control"
-            type="file"
-            name="file"
-            placeholder="Upload an image"
-            onChange={handleUpload}
-          />{" "}
-        </p>
+                <CheckboxGroup isInline spacing={8}>
+                  {tags
+                    ? tags.map((tag) => {
+                        return (
+                          <div>
+                            <Checkbox
+                              id={tag.id}
+                              onChange={() => editTags(tag.id)}
+                              value={postTags}
+                            >
+                              {" "}
+                              {tag.title}
+                            </Checkbox>
+                          </div>
+                        );
+                      })
+                    : null}
+                </CheckboxGroup>
 
-        {loadingImage ? "Uploading your image..." : <img src={image} />}
-        <input type="submit" />
-      </form>
-      {message}
-    </div>
+                <FormControl isRequired>
+                  <FormLabel>Title</FormLabel>
+                  <Input
+                    type="text"
+                    placeholder="Cranberry Pecan Granola"
+                    value={title}
+                    onChange={(event) => setTitle(event.target.value)}
+                  />
+                  <FormLabel>Tell us how it's made!</FormLabel>
+                  <Textarea
+                    placeholder="I have been making this since forever. It is a family favourite."
+                    size="sm"
+                    value={description}
+                    onChange={(event) => setDescription(event.target.value)}
+                  />
+                  <FormLabel>Price</FormLabel>
+                  <Input
+                    type="number"
+                    placeholder="5"
+                    value={price}
+                    onChange={(event) => setPrice(event.target.value)}
+                  />
+                  <br />
+                  <FormLabel>
+                    {" "}
+                    Finally, add your best picture!{" "}
+                    <span alt="cupcake">🧁</span>{" "}
+                  </FormLabel>
+                  <Input
+                    type="file"
+                    placeholder="Upload an image"
+                    onChange={handleUpload}
+                  />
+
+                  <br />
+                  <Box borderWidth={1} borderRadius={8}>
+                    {loadingImage ? (
+                      "Uploading your image..."
+                    ) : (
+                      <img src={image} />
+                    )}
+                  </Box>
+                  <br />
+                </FormControl>
+
+                <Button
+                  variantColor="#hotpink"
+                  variant="outline"
+                  width="full"
+                  mt={4}
+                  type="submit"
+                  color="#eb8f8f"
+                  borderWidth={1}
+                  borderColor="#eb8f8f"
+                >
+                  {" "}
+                  Create Listing!{" "}
+                </Button>
+              </form>
+            </Box>
+          </Box>
+        </Flex>
+      </>
+    )
   );
 }

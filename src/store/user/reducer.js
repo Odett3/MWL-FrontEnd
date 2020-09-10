@@ -11,13 +11,19 @@ export default (state = initialState, action) => {
       localStorage.setItem("token", action.payload.token);
       return { ...state, ...action.payload };
 
+    case "POST_CREATED":
+      return {
+        ...state,
+        listings: [...state.listings, action.payload],
+      };
+
     case "USER_PROFILE":
       return {
         ...state,
         name: action.payload.name,
         surname: action.payload.surname,
         listings: action.payload.user.listings,
-        image: [...action.payload.image],
+        image: action.payload.image,
       };
 
     case "LOG_OUT":

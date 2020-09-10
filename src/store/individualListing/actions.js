@@ -19,9 +19,8 @@ export function updateLikes(data) {
 
 export function fetchPost(id) {
   return async function thunk(dispatch, getState) {
-    dispatch(startLoadingPost());
-
     const res = await axios.get(`http://localhost:4000/feed/${id}`);
+    console.log("thunk -> res", res);
 
     const onePost = res.data.listing;
 

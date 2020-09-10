@@ -5,7 +5,18 @@ import { fetchPosts } from "../store/feed/actions";
 import { fetchTags } from "../store/tags/actions";
 import { selectFeedLoading, selectFeedPosts } from "../store/feed/selectors";
 import { selectTags } from "../store/tags/selectors";
-import { Button } from "react-bootstrap";
+import {
+  Box,
+  Button,
+  Grid,
+  Tag,
+  TagLabel,
+  Heading,
+  Select,
+  Divider,
+  Flex,
+  Spinner,
+} from "@chakra-ui/core";
 
 export default function Feed() {
   const dispatch = useDispatch();
@@ -42,82 +53,90 @@ export default function Feed() {
   } else if (sortedPost === "datePosted") {
     filteredListings = [...posts].sort(compareDatePosted);
   } else {
-    console.log("THIS IS POSTS", posts);
     filteredListings = [...posts];
   }
-  console.log("THIS IS FILTERED", filteredListings);
-  // if (posts.name === undefined) return <h1>hello</h1>;
 
   return (
     posts && (
-      <div className="container home">
-        <h2>What's on offer?</h2>
-
-        <h4>
-          Filter by Tag:
-          <Button
-            variant="secondary"
-            size="lg"
-            onClick={() => setSelectedTag(null)}
+      <Box>
+        {" "}
+        <Heading>
+          <div className="appTitle">What's on offer?</div>
+        </Heading>
+        <Box>
+          <Divider borderColor="#eb8f8f" />
+          <Select
+            onChange={(event) => setSortedPost(event.target.value)}
+            variant="outline"
+            placeholder="Sort By.."
           >
-            All Listings{" "}
-          </Button>
-          {tags
-            ? tags.map((tag) => {
-                return (
-                  <Button
-                    onClick={() => setSelectedTag(tag)}
-                    key={tag.id}
-                    variant="secondary"
-                    size="lg"
-                  >
-                    {tag.title}
-                  </Button>
-                );
-              })
-            : null}{" "}
-          <br />
-          Filter by Date/Popularity:
-          <select onChange={(event) => setSortedPost(event.target.value)}>
-            <option value=" "></option>
             <option value="mostLikes">Sort By Most Liked</option>
             <option value="datePosted">Sort By Last Posted</option>
-          </select>
-        </h4>
-        {loading ? "Posts loading..." : null}
-        {filteredListings &&
-          filteredListings.map((list) => {
-            console.log("list", list);
-            return (
-              <ListingCard
-                id={list.id}
-                title={list.title}
-                name={list.user.name}
-                icon={list.user.image}
-                location={list.user.address}
-                img={list.listingImages.map((i) => {
-                  return i.imageUrl;
-                })}
-                likes={list.likes}
-                tags={list.tags.map((t) => {
+          </Select>
+          <Divider borderColor="#eb8f8f" />
+        </Box>
+        <Flex w="100%" flexWrap="wrap" justify="space-between">
+          <Box>
+            <Button
+              variant="secondary"
+              size="lg"
+              color="#eb8f8f"
+              borderWidth={1}
+              borderColor="#eb8f8f"
+              onClick={() => setSelectedTag(null)}
+            >
+              All Listings{" "}
+            </Button>
+            {tags
+              ? tags.map((tag) => {
                   return (
-                    <>
-                      <Button
-                        className="btn-flat"
-                        size="sm"
-                        variant="secondary"
-                        disabled
-                      >
-                        {t.title} 🏷
-                      </Button>
-                    </>
+                    <Button
+                      onClick={() => setSelectedTag(tag)}
+                      key={tag.id}
+                      variant="secondary"
+                      size="lg"
+                      color="#eb8f8f"
+                      borderWidth={1}
+                      borderColor="#eb8f8f"
+                    >
+                      {tag.title}
+                    </Button>
                   );
-                })}
-                listingId={list.id}
-              />
-            );
-          })}
-      </div>
+                })
+              : null}{" "}
+          </Box>
+        </Flex>
+        <Divider />
+        <Divider />
+        <Grid templateColumns="repeat(4, 4fr)" gap={3}>
+          {filteredListings &&
+            filteredListings.map((list) => {
+              return (
+                <ListingCard
+                  key={list.id}
+                  title={list.title}
+                  name={list.user.name}
+                  icon={list.user.image}
+                  location={list.user.address}
+                  img={list.listingImages.map((i) => {
+                    return i.imageUrl;
+                  })}
+                  likes={list.likes}
+                  tags={list.tags.map((t) => {
+                    return (
+                      <>
+                        <Tag>
+                          <TagLabel key={t.id}>#{t.title}</TagLabel>
+                        </Tag>{" "}
+                      </>
+                    );
+                  })}
+                  listingId={list.id}
+                />
+              );
+            })}
+        </Grid>
+      </Box>
     )
   );
 }

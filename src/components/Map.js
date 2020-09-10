@@ -6,6 +6,8 @@ import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { selectUsers } from "../store/userProfile/selectors";
 import { fetchAllUsers } from "../store/userProfile/actions";
+import { Card, Button } from "react-bootstrap";
+import { Spinner, Flex, Box } from "@chakra-ui/core";
 
 export default function MapComponent() {
   const users = useSelector(selectUsers);
@@ -23,28 +25,51 @@ export default function MapComponent() {
   });
 
   return users === undefined ? (
-    <p>"loading content..."</p>
+    <Flex width="full" align="center" justifyContent="center">
+      <Spinner
+        thickness="4px"
+        speed="0.65s"
+        emptyColor="pink.200"
+        color="pink"
+        size="xl"
+      />
+    </Flex>
   ) : (
     <div>
-      <Map center={[52.37949, 4.63772]} zoom={12}>
-        <TileLayer
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-        />
+      <Box p={8} borderWidth={1} borderRadius={8} boxShadow="lg">
+        <Map center={[52.37949, 4.63772]} zoom={12}>
+          <TileLayer
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+          />
 
-        {users.map((u) => {
-          return (
-            <>
-              <Marker icon={mwl} key={u.id} position={[u.lat, u.long]}>
-                <Popup>
-                  {u.name}
-                  <Link to={`/user/${u.id}`}>CHECK ME OUT</Link>
-                </Popup>
-              </Marker>
-            </>
-          );
-        })}
-      </Map>
+          {users.map((u) => {
+            return (
+              <>
+                <Marker icon={mwl} key={u.id} position={[u.lat, u.long]}>
+                  <Popup>
+                    <Card>
+                      <Card.Header>
+                        <em> Made with Love</em> 💖 in {u.address}
+                      </Card.Header>
+                      <Card.Body>
+                        <Card.Title>{u.name}</Card.Title>
+                        <Card.Text>
+                          👩🏻‍🍳Support Local Talent👩🏻‍🍳 Click the button below to
+                          visit the user's profile and check out the listings.
+                        </Card.Text>
+                        <Button variant="dark">
+                          <Link to={`/user/${u.id}`}>Go to profile</Link>
+                        </Button>
+                      </Card.Body>
+                    </Card>
+                  </Popup>
+                </Marker>
+              </>
+            );
+          })}
+        </Map>
+      </Box>
     </div>
   );
 }

@@ -22,8 +22,6 @@ export function usersFetched(data) {
 
 export function fetchProfile(id) {
   return async function thunk(dispatch, getState) {
-    dispatch(startLoadingPost());
-
     const res = await axios.get(`http://localhost:4000/user/${id}`);
 
     const oneProfile = res.data.user;
