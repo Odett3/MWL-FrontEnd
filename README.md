@@ -1,4 +1,3 @@
-
 ## 💖 Made with Love 💖
 
 ### Goal of the app: ✅✅
@@ -13,38 +12,41 @@ My aspiration is to make Homemade food trendy again.🍰🍪🍯
 
 1. As a new user/ viewer of the site logged in or not I want to be able to see what kind of food listings are on offer.
 
-2. I would like to be able to click on a listing of interest and see all the information; price, address, description of how it’s made and pictures. 
+2. I would like to be able to click on a listing of interest and see all the information; price, address, description of how it’s made and pictures.
 
-3. As a new user, I want to be able to sign up and start sharing my food with my neighbours and browse what food is available. 
+3. As a new user, I want to be able to sign up and start sharing my food with my neighbours and browse what food is available.
 
 4. As a user logged in, I would like to be able to click on the user’s picture and see more information about her/him.
 
-5. As a new user, I would like to be able to add a new listing of the homemade food. I would like to be able to attach pictures to attract buyers and also add the location of where I am posting so prospective buyers can see where I am at 
+5. As a new user, I would like to be able to add a new listing of the homemade food. I would like to be able to attach pictures to attract buyers and also add the location of where I am posting so prospective buyers can see where I am at
 6. As a vegetarian user browsing the website, I want the listings to be tagged so I will only click on the listings that suit my needs. All listings should contain tags so it's easy to filter ex "vegan".
 
-7. As a user wanting to browse through food listings and hopefully find something interesting,  I would like to see what is around me - geolocation
+7. As a user wanting to browse through food listings and hopefully find something interesting, I would like to see what is around me - geolocation
 
 8. As a user whether logged in or not I want to be able to encourage other users to post more so I want to be able to like a post.
 
 9. As a viewer of the website, I want to be able to toggle light and dark mode accordingly, I want the site to be aesthetically pleasing and easy to use.
 
- ## 🚀 Technologies used: 
+## 🚀 Technologies used:
 
 React
 React Router DOM
 Redux
 Redux Thunk
 React Leaflet
-React-places-autocomplete 
+React-places-autocomplete
 Moment
 Cloudinary
-Google API's 
+Google API's
 Axios
 Html, JSX
-CSS, Chakra UI 
+CSS, Chakra UI
 
+App Demo:
 
+Light Mode ☀️
 
+(https://media.giphy.com/media/VhiqTmv3Iopm5BuO9X/giphy.gif)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 

@@ -13,8 +13,7 @@ export default (state = initialState, action) => {
 
     case "POST_CREATED":
       return {
-        ...state,
-        listings: [...state.listings, action.payload],
+        listings: [action.payload],
       };
 
     case "USER_PROFILE":

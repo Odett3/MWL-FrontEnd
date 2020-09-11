@@ -78,7 +78,7 @@ export default function CreateListing() {
     data.append("upload_preset", "MWLlistings");
     setLoadingImage(true);
     const res = await fetch(
-      "http://api.cloudinary.com/v1_1/dztzswpcp/image/upload",
+      "https://api.cloudinary.com/v1_1/dztzswpcp/image/upload",
       {
         method: "POST",
         body: data,
