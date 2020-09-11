@@ -3,7 +3,7 @@ import { selectTags } from "../store/tags/selectors";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchTags } from "../store/tags/actions";
 import { useHistory } from "react-router-dom";
-import { addPost } from "../store/feed/actions";
+import { addPost } from "../store/user/actions";
 import { selectToken } from "../store/user/selectors";
 import {
   Box,

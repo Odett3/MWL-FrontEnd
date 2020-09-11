@@ -15,10 +15,10 @@ export default function ListingCard(props) {
     flex: "1",
     minW: "300px",
     textAlign: "center",
-    mx: "6",
-    mb: "6",
-    borderWidth: "1",
-    borderRadius: "8",
+    mx: "10px",
+    mb: "15px",
+    borderWidth: "1px",
+    borderRadius: "8px",
     boxShadow: "lg",
   };
 

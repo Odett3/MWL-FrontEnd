@@ -32,28 +32,28 @@ export async function fetchPosts(dispatch, getState) {
   dispatch(postsFetched(morePosts));
 }
 
-export function addPost(title, description, price, imageUrl, tags) {
-  return async function (dispatch, getState) {
-    const token = selectToken(getState());
+// export function addPost(title, description, price, imageUrl, tags) {
+//   return async function (dispatch, getState) {
+//     const token = selectToken(getState());
 
-    dispatch(appLoading());
-    if (token === null) return;
-    try {
-      const response = await axios.post(
-        "http://localhost:4000/create",
-        {
-          title,
-          description,
-          price,
-          imageUrl,
-          tags,
-        },
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
-      dispatch(appDoneLoading());
-      dispatch(postCreated());
-    } catch (error) {
-      console.log(error);
-    }
-  };
-}
+//     dispatch(appLoading());
+//     if (token === null) return;
+//     try {
+//       const response = await axios.post(
+//         "http://localhost:4000/create",
+//         {
+//           title,
+//           description,
+//           price,
+//           imageUrl,
+//           tags,
+//         },
+//         { headers: { Authorization: `Bearer ${token}` } }
+//       );
+//       dispatch(appDoneLoading());
+//       dispatch(postCreated());
+//     } catch (error) {
+//       console.log(error);
+//     }
+//   };
+// }
