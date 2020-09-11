@@ -46,6 +46,7 @@ App Demo:
 
 Light Mode ☀️
 
+![Gif of demo in light mode]
 (https://media.giphy.com/media/VhiqTmv3Iopm5BuO9X/giphy.gif)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
