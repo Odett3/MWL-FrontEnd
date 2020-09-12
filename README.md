@@ -44,11 +44,12 @@ CSS, Chakra UI
 
 App Demo:
 
-Light Mode ☀️
+Light Mode ☀️ 
 
 ![Gif of demo in light mode](https://media.giphy.com/media/VhiqTmv3Iopm5BuO9X/giphy.gif)
 
 Dark Mode 🌓
+
 
 ![Gif of demo in dark mode](https://media.giphy.com/media/ReVLNaVBJEsJDmE0UY/giphy.gif)
 
