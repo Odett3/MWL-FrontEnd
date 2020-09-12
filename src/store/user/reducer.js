@@ -2,6 +2,8 @@ const initialState = {
   token: localStorage.getItem("token"),
   name: null,
   email: null,
+  surname: null,
+  image: null,
   listings: [],
 };
 
@@ -13,7 +15,8 @@ export default (state = initialState, action) => {
 
     case "POST_CREATED":
       return {
-        listings: [action.payload],
+        ...state,
+        listings: [...state.user.listings, action.payload],
       };
 
     case "USER_PROFILE":

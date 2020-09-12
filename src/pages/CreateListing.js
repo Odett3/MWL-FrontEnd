@@ -5,6 +5,7 @@ import { fetchTags } from "../store/tags/actions";
 import { useHistory } from "react-router-dom";
 import { addPost } from "../store/user/actions";
 import { selectToken } from "../store/user/selectors";
+import { fetchUserInfo } from "../store/user/actions";
 import {
   Box,
   Heading,
@@ -26,9 +27,8 @@ export default function CreateListing() {
   const [postTags, setPostTags] = useState([]);
   const [image, setImage] = useState("");
   const [loadingImage, setLoadingImage] = useState("");
-  const [message, setMessage] = useState("");
+
   const history = useHistory();
-  const [addTag, setNewTag] = useState("");
 
   const dispatch = useDispatch();
   const tags = useSelector(selectTags);
@@ -40,15 +40,14 @@ export default function CreateListing() {
   function handleSubmit(event) {
     event.preventDefault();
     dispatch(addPost(title, description, price, image, postTags));
-
+    dispatch(fetchUserInfo());
     setTitle("");
     setDescription("");
     setPrice("");
     setImage("");
     setPostTags([]);
 
-    setMessage("Thank you! Post Created!");
-
+    dispatch(fetchUserInfo());
     history.push("/mypage");
   }
   //tags functions:

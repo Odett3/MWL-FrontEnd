@@ -24,8 +24,9 @@ export default function UserProfile() {
     dispatch(fetchProfile(id));
   }, [dispatch, id]);
 
-  const p = useSelector(selectProfile);
   const token = useSelector(selectToken);
+  const p = useSelector(selectProfile);
+
   const cardC = {
     flex: "1",
     minW: "300px",
@@ -63,31 +64,29 @@ export default function UserProfile() {
           color: "black",
         }}
       >
-        <Avatar size="xxl" src={p.profile.image} showBorder />
+        <Avatar size="xxl" src={p.image} showBorder />
         <Heading mb={4}>
-          {p.profile.name} {p.profile.surname}
+          {p.name} {p.surname}
         </Heading>
         <Text fontSize="xl" color="gray.500">
-          <ul key={p.profile.name}>
+          <ul key={p.name}>
             <li>
-              {p.profile.name} has{" "}
+              {p.name} has{" "}
               <strong>
-                {p.profile.listings.length === 0
-                  ? "no"
-                  : p.profile.listings.length}
+                {p.listings.length === 0 ? "no" : p.listings.length}
               </strong>{" "}
               active listings 💖
             </li>
             <li>
               Posting on Made with Love since:{" "}
-              {moment(p.profile.createdAt).format("DD-MM-YYYY")}
+              {moment(p.createdAt).format("DD-MM-YYYY")}
             </li>
           </ul>
         </Text>
       </Box>
 
       <Grid templateColumns="repeat(4, 1fr)" gap={4}>
-        {p.profile.listings.map((l) => {
+        {p.listings.map((l) => {
           return (
             <Box {...cardC}>
               <Box>
