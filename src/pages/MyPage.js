@@ -13,7 +13,6 @@ export default function MyPage() {
   const token = useSelector(selectToken);
   const user = useSelector(selectUser);
   const listings = useSelector(selectUserListings);
-  console.log(listings);
 
   useEffect(() => {
     dispatch(fetchUserInfo);

@@ -8,9 +8,10 @@ const loginSuccess = (userWithToken) => {
   };
 };
 
-export function postCreated() {
+export function postCreated(data) {
   return {
     type: "POST_CREATED",
+    payload: data,
   };
 }
 
@@ -32,16 +33,7 @@ export const login = (email, password) => {
       });
 
       dispatch(loginSuccess(response.data));
-
-      // dispatch(showMessageWithTimeout("success", false, "welcome back!", 1500));
-      // dispatch(appDoneLoading());
     } catch (error) {
-      // if (error.response) {
-      //   dispatch(setMessage("danger", true, error.response.data.message));
-      // } else {
-      //   dispatch(setMessage("danger", true, error.message));
-      // }
-      // dispatch(appDoneLoading());
       console.log(error);
     }
   };

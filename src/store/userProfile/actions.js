@@ -33,7 +33,6 @@ export function fetchProfile(id) {
 export function fetchAllUsers() {
   return async function thunk(dispatch, getState) {
     const res = await axios.get("http://localhost:4000/users");
-    console.log("what is res in actions", res);
 
     const users = res.data.allUsers;
 

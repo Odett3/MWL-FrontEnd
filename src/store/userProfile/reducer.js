@@ -2,7 +2,7 @@ const initialState = {
   loading: true,
   profile: null,
   users: [],
-  // comments: []
+  // todo comments: []
 };
 
 export default function postPageSliceReducer(state = initialState, action) {
