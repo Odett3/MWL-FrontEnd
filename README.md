@@ -8,6 +8,28 @@ Are you a great baker and have loads of free time on your hands? Share pictures 
 
 My aspiration is to make Homemade food trendy again.🍰🍪🍯
 
+### Goal of the project: ✅✅
+
+The goal of this project is to build a full-stack working app, practicing what we have learned in the bootcamp while exploring new technologies (I've listed all of these below) . I learned how to implement some features independently by doing research and watching tutorials on youtube.
+
+
+
+* Build a full stak working app -> front end and back end 
+* Have an initial working version after 2 weeks.** 
+* Apply what we learned in Codaisseur's bootcamp
+* Learn and implement new technologies/libraries
+* Showcase and document development skills using:
+  * wireframes as Minimum Viable Product
+  * data models
+  * user stories perspective
+  * agile/kanban project approach
+  * clear and frequent git commit mesages 
+
+🍉 I am in the beginning of my coding adventure so any feedback or constructive critisism  you might have is highly appreciated! 
+
+** (I will still be adding features in my free time and plan on "releasing" the mobile version of this app using 🍉 React Native🍉 very soon )
+
+
 ## 👩🏻‍🍳🍪 User Stories:
 
 1. As a new user/ viewer of the site logged in or not I want to be able to see what kind of food listings are on offer.
@@ -29,20 +51,25 @@ My aspiration is to make Homemade food trendy again.🍰🍪🍯
 
 ## 🚀 Technologies used:
 
-React
-React Router DOM
-Redux
-Redux Thunk
-React Leaflet
-React-places-autocomplete
-Moment
-Cloudinary
-Google API's
-Axios
-Html, JSX
-CSS, Chakra UI
+* 🔹React
+* 🔹React Router DOM
+* 🔹Redux
+* 🔹Redux Thunk
+* 🔹React Leaflet
+* 🔹React-places-autocomplete
+* 🔹Moment
+* 🔹Cloudinary
+* 🔹Google API's
+* 🔹Axios
+* 🔹Html,JSX
+* 🔹CSS,  Chakra UI
 
-App Demo:
+## Git Usage
+
+✅ I have used branches and frequent commits with clear messages for every feature I have worked on.
+
+
+## App Demo:
 
 Light Mode ☀️
 
@@ -54,69 +81,12 @@ Dark Mode 🌓
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
 
-In the project directory, you can run:
 
-### `npm start`
+## Setting up 
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+* clone app > [Front-end] git@github.com:Odett3/MadeWithLove-FrontEnd.git
+* cd into the project
+* npm i to install all the dependencies I have used. 
+* npm start
+* Don't forget the backend, which is the backbone of this project > [Back-end] git@github.com:Odett3/MadeWithLove-BackEnd.git
