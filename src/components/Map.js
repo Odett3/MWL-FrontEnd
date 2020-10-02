@@ -20,7 +20,7 @@ export default function MapComponent() {
 
   const mwl = new Icon({
     iconUrl:
-      "https://res.cloudinary.com/dztzswpcp/image/upload/v1599502988/mwl_bleqzc.png",
+      "https://res.cloudinary.com/dztzswpcp/image/upload/v1601658149/madewithlove/kawaii-cupcake_zxvyfc.png",
     iconSize: [35, 35],
   });
 
