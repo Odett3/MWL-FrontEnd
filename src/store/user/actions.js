@@ -15,10 +15,10 @@ export function postCreated(data) {
   };
 }
 
-export function storyDeleteSuccess(storyId) {
+export function storyDeleteSuccess(postId) {
   return {
-    type: "STORY_DELETED",
-    payload: storyId,
+    type: "POST_DELETED",
+    payload: postId,
   };
 }
 
@@ -134,7 +134,7 @@ export function deletePost(listingId) {
           },
         }
       );
-      console.log("Story deleted?", response);
+      dispatch(storyDeleteSuccess(response.data.post.id));
     } catch (e) {
       console.error(e);
     }

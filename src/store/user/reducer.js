@@ -32,6 +32,15 @@ export default (state = initialState, action) => {
       localStorage.removeItem("token");
       return { ...initialState, token: null };
 
+    case "POST_DELETED":
+      const postId = action.payload;
+      const newListings = state.listings.filter((post) => post.id !== postId);
+      return {
+        ...state,
+
+        listings: newListings,
+      };
+
     default:
       return state;
   }
