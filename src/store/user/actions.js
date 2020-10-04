@@ -15,6 +15,13 @@ export function postCreated(data) {
   };
 }
 
+export function storyDeleteSuccess(storyId) {
+  return {
+    type: "STORY_DELETED",
+    payload: storyId,
+  };
+}
+
 export const logOut = () => ({ type: "LOG_OUT" });
 
 const userInfo = (data) => {
@@ -110,6 +117,26 @@ export function addPost(title, description, price, imageUrl, tags) {
       dispatch(postCreated());
     } catch (error) {
       console.log(error);
+    }
+  };
+}
+
+export function deletePost(listingId) {
+  return async (dispatch, getState) => {
+    const token = selectToken(getState());
+    console.log("what is", token);
+    try {
+      const response = await axios.delete(
+        `http://localhost:4000/delete/${listingId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      console.log("Story deleted?", response);
+    } catch (e) {
+      console.error(e);
     }
   };
 }

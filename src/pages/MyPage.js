@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { selectUser, selectUserListings } from "../store/user/selectors";
-import { fetchUserInfo } from "../store/user/actions";
+import { fetchUserInfo, deletePost } from "../store/user/actions";
 
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
@@ -9,6 +9,9 @@ import moment from "moment";
 import { Box, Avatar, Heading, Text, Button, Grid } from "@chakra-ui/core";
 
 export default function MyPage() {
+  const [refToDelete, setRef] = useState();
+  console.log("MyPage -> refToDelete", refToDelete);
+
   const dispatch = useDispatch();
   const token = useSelector(selectToken);
   const user = useSelector(selectUser);
@@ -16,6 +19,10 @@ export default function MyPage() {
 
   useEffect(() => {
     dispatch(fetchUserInfo);
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(deletePost(refToDelete));
   }, [dispatch]);
 
   const cardC = {
@@ -83,6 +90,14 @@ export default function MyPage() {
                         💖{l.likes}
                       </Text>
                     </Box>
+
+                    <Button
+                      variantColor="pink"
+                      variant="ghost"
+                      onClick={() => dispatch(deletePost(l.id))}
+                    >
+                      Delete
+                    </Button>
                   </Box>
                 );
               })
